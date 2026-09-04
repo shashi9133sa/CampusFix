@@ -1,0 +1,795 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard | CampusFix</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         DASHBOARD LAYOUT
+         ===================================================== -->
+
+    <div class="dashboard-layout">
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside class="sidebar" id="sidebar">
+
+
+            <!-- Logo -->
+
+            <div class="sidebar-logo">
+
+                <a href="index.html" class="logo">
+
+                    <span class="logo-icon">
+                        <i class="fa-solid fa-wrench"></i>
+                    </span>
+
+                    <span>
+                        Campus<span class="logo-highlight">Fix</span>
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <nav class="sidebar-nav">
+
+                <div class="nav-section">
+
+                    <span class="nav-title">
+                        MAIN MENU
+                    </span>
+
+
+                    <a href="#" class="sidebar-link active">
+                        
+
+                        <span class="sidebar-icon">
+                            <i class="fa-solid fa-grid-2"></i>
+                        </span>
+
+                        <span>
+                            Dashboard
+                        </span>
+
+                    </a>
+
+
+                    <a href="report.html" class="sidebar-link">
+
+                        <span class="sidebar-icon">
+                            <i class="fa-solid fa-plus"></i>
+                        </span>
+
+                        <span>
+                            Report Issue
+                        </span>
+
+                    </a>
+
+
+                    <a href="complaints.html" class="sidebar-link">
+
+                        <span class="sidebar-icon">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                        </span>
+
+                        <span>
+                            My Complaints
+                        </span>
+
+                    </a>
+
+
+                    <a href="notifications.html" class="sidebar-link">
+
+                        <span class="sidebar-icon">
+                            <i class="fa-regular fa-bell"></i>
+                        </span>
+
+                        <span>
+                            Notifications
+                        </span>
+
+                        <span class="notification-count">
+                            3
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <div class="nav-section">
+
+                    <span class="nav-title">
+                        ACCOUNT
+                    </span>
+
+
+                    <a href="profile.html" class="sidebar-link">
+
+                        <span class="sidebar-icon">
+                            <i class="fa-regular fa-user"></i>
+                        </span>
+                    
+                        <span>
+                            My Profile
+                        </span>
+                    
+                    </a>
+
+
+                    <a href="settings.html" class="sidebar-link">
+
+                        <span class="sidebar-icon">
+                            <i class="fa-solid fa-gear"></i>
+                        </span>
+
+                        <span>
+                            Settings
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </nav>
+
+
+            <!-- Sidebar Bottom -->
+
+            <div class="sidebar-bottom">
+
+                <div class="help-card">
+
+                    <div class="help-icon">
+                        <i class="fa-regular fa-circle-question"></i>
+                    </div>
+
+                    <strong>
+                        Need help?
+                    </strong>
+
+                    <p>
+                        Contact the campus support team.
+                    </p>
+
+                    <a href="#">
+                        Get Support
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <button class="logout-btn" id="logoutBtn">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>
+                        Logout
+                    </span>
+
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN CONTENT
+             ================================================= -->
+
+        <main class="dashboard-main">
+
+
+            <!-- ================= TOPBAR ================= -->
+
+            <header class="dashboard-topbar">
+
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    type="button"
+                >
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+
+                <div class="breadcrumb">
+
+                    <span>
+                        CampusFix
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                    <strong>
+                        Dashboard
+                    </strong>
+
+                </div>
+
+
+                <div class="topbar-actions">
+
+
+                    <!-- Notification -->
+
+                    <<a
+                    href="notifications.html"
+                    class="topbar-icon"
+                    aria-label="Notifications"
+                >
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </a>
+
+                    <!-- Profile -->
+
+                    <button
+                        class="profile-button"
+                        type="button"
+                    >
+
+                        <span class="profile-avatar">
+                            SK
+                        </span>
+
+                        <span class="profile-details">
+
+                            <strong>
+                                Student
+                            </strong>
+
+                            <small>
+                                Student Account
+                            </small>
+
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- ================= CONTENT ================= -->
+
+            <div class="dashboard-content">
+
+
+                <!-- ================= WELCOME ================= -->
+
+                <section class="welcome-section">
+
+                    <div>
+
+                        <span class="welcome-label">
+                            STUDENT DASHBOARD
+                        </span>
+
+                        <h1>
+                            Good evening, Student 👋
+                        </h1>
+
+                        <p>
+                            Here's what's happening with your
+                            campus reports today.
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="report.html"
+                        class="report-button"
+                    >
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        Report New Issue
+
+                    </a>
+
+                </section>
+
+
+                <!-- ================= STATISTICS ================= -->
+
+                <section class="stats-grid">
+
+
+                    <div class="dashboard-stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="dashboard-stat-icon purple">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                            </div>
+
+                            <span class="stat-change positive">
+                                +2 this month
+                            </span>
+
+                        </div>
+
+                        <span class="stat-label">
+                            Total Reports
+                        </span>
+
+                        <strong class="dashboard-number">
+                            12
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="dashboard-stat-icon orange">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+
+                            <span class="stat-change">
+                                Active
+                            </span>
+
+                        </div>
+
+                        <span class="stat-label">
+                            Pending
+                        </span>
+
+                        <strong class="dashboard-number">
+                            3
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="dashboard-stat-icon blue">
+                                <i class="fa-solid fa-spinner"></i>
+                            </div>
+
+                            <span class="stat-change">
+                                Working
+                            </span>
+
+                        </div>
+
+                        <span class="stat-label">
+                            In Progress
+                        </span>
+
+                        <strong class="dashboard-number">
+                            2
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="dashboard-stat-icon green">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+
+                            <span class="stat-change positive">
+                                83% success
+                            </span>
+
+                        </div>
+
+                        <span class="stat-label">
+                            Resolved
+                        </span>
+
+                        <strong class="dashboard-number">
+                            7
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= MAIN GRID ================= -->
+
+                <section class="dashboard-grid">
+
+
+                    <!-- ================= RECENT COMPLAINTS ================= -->
+
+                    <div class="dashboard-panel complaints-panel">
+
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="panel-label">
+                                    ACTIVITY
+                                </span>
+
+                                <h2>
+                                    Recent Complaints
+                                </h2>
+
+                            </div>
+
+                            <a href="complaints.html">
+                                View all
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+
+                        <div class="complaints-list">
+
+
+                            <!-- Complaint 1 -->
+
+                            <div class="complaint-row">
+
+                                <div class="complaint-category light-icon">
+
+                                    <i class="fa-solid fa-lightbulb"></i>
+
+                                </div>
+
+
+                                <div class="complaint-details">
+
+                                    <strong>
+                                        Classroom Light Not Working
+                                    </strong>
+
+                                    <span>
+                                        Block A • Room 204
+                                    </span>
+
+                                    <small>
+                                        Reported 2 hours ago
+                                    </small>
+
+                                </div>
+
+
+                                <span class="complaint-status pending">
+                                    Pending
+                                </span>
+
+                            </div>
+
+
+                            <!-- Complaint 2 -->
+
+                            <div class="complaint-row">
+
+                                <div class="complaint-category water-icon">
+
+                                    <i class="fa-solid fa-faucet-drip"></i>
+
+                                </div>
+
+
+                                <div class="complaint-details">
+
+                                    <strong>
+                                        Water Leakage
+                                    </strong>
+
+                                    <span>
+                                        Block B • 2nd Floor
+                                    </span>
+
+                                    <small>
+                                        Reported yesterday
+                                    </small>
+
+                                </div>
+
+
+                                <span class="complaint-status progress">
+                                    In Progress
+                                </span>
+
+                            </div>
+
+
+                            <!-- Complaint 3 -->
+
+                            <div class="complaint-row">
+
+                                <div class="complaint-category wifi-icon">
+
+                                    <i class="fa-solid fa-wifi"></i>
+
+                                </div>
+
+
+                                <div class="complaint-details">
+
+                                    <strong>
+                                        Wi-Fi Connection Issue
+                                    </strong>
+
+                                    <span>
+                                        Central Library
+                                    </span>
+
+                                    <small>
+                                        Reported 3 days ago
+                                    </small>
+
+                                </div>
+
+
+                                <span class="complaint-status resolved">
+                                    Resolved
+                                </span>
+
+                            </div>
+
+
+                            <!-- Complaint 4 -->
+
+                            <div class="complaint-row">
+
+                                <div class="complaint-category chair-icon">
+
+                                    <i class="fa-solid fa-chair"></i>
+
+                                </div>
+
+
+                                <div class="complaint-details">
+
+                                    <strong>
+                                        Damaged Classroom Chair
+                                    </strong>
+
+                                    <span>
+                                        Block C • Room 108
+                                    </span>
+
+                                    <small>
+                                        Reported 5 days ago
+                                    </small>
+
+                                </div>
+
+
+                                <span class="complaint-status resolved">
+                                    Resolved
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= QUICK ACTIONS ================= -->
+
+                    <div class="dashboard-panel quick-panel">
+
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="panel-label">
+                                    QUICK ACTIONS
+                                </span>
+
+                                <h2>
+                                    What do you need?
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="quick-actions">
+
+
+                            <a href="report.html" class="quick-action">
+
+                                <div class="quick-action-icon purple-bg">
+
+                                    <i class="fa-solid fa-plus"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Report an Issue
+                                    </strong>
+
+                                    <span>
+                                        Submit a new complaint
+                                    </span>
+
+                                </div>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </a>
+
+
+                            <a href="complaints.html" class="quick-action">
+
+                                <div class="quick-action-icon blue-bg">
+
+                                    <i class="fa-solid fa-list-check"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Track Complaints
+                                    </strong>
+
+                                    <span>
+                                        Check your reports
+                                    </span>
+
+                                </div>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </a>
+
+
+                            <a href="#" class="quick-action">
+
+                                <div class="quick-action-icon green-bg">
+
+                                    <i class="fa-solid fa-star"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Give Feedback
+                                    </strong>
+
+                                    <span>
+                                        Rate resolved issues
+                                    </span>
+
+                                </div>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </a>
+
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= IMPACT SECTION ================= -->
+
+                <section class="impact-card">
+
+
+                    <div class="impact-content">
+
+                        <div class="impact-icon">
+
+                            <i class="fa-solid fa-leaf"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="panel-label">
+                                YOUR IMPACT
+                            </span>
+
+                            <h2>
+                                You're helping build a better campus.
+                            </h2>
+
+                            <p>
+                                Your reports help the college identify
+                                problems faster and improve campus life
+                                for everyone.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="impact-number">
+
+                        <strong>
+                            7
+                        </strong>
+
+                        <span>
+                            issues helped resolve
+                        </span>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- Dashboard JavaScript -->
+
+    <script src="dashboard.js"></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Notifications | CampusFix</title>
+
+<link rel="stylesheet" href="notifications.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- =========================
+     SIDEBAR
+========================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+
+        <span>Campus<span>Fix</span></span>
+
+    </div>
+
+
+    <div class="menu-title">
+        MAIN MENU
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a href="student-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+        </a>
+
+
+        <a href="report.html" class="nav-link">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>Report Issue</span>
+        </a>
+
+
+        <a href="complaints.html" class="nav-link">
+            <i class="fa-solid fa-list-check"></i>
+            <span>My Complaints</span>
+
+            <span class="notification-count">
+                3
+            </span>
+        </a>
+
+
+        <a href="notifications.html" class="nav-link active">
+            <i class="fa-regular fa-bell"></i>
+            <span>Notifications</span>
+
+            <span class="notification-count" id="sidebarNotificationCount">
+                3
+            </span>
+        </a>
+
+    </nav>
+
+
+    <div class="menu-title account-title">
+        ACCOUNT
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a href="profile.html" class="nav-link">
+            <i class="fa-regular fa-user"></i>
+            <span>My Profile</span>
+        </a>
+
+
+        <a href="settings.html" class="nav-link">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="help-card">
+
+            <div class="help-icon">
+                <i class="fa-regular fa-circle-question"></i>
+            </div>
+
+            <strong>
+                Need Help?
+            </strong>
+
+            <p>
+                We're here to help you.
+            </p>
+
+            <button>
+                Contact Support
+            </button>
+
+        </div>
+
+
+        <button class="logout-btn" id="logoutButton">
+
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================== -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button class="menu-button" id="menuButton">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div>
+
+                <span class="breadcrumb">
+                    Dashboard
+                </span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+                <span class="current-page">
+                    Notifications
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <button class="top-icon">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span></span>
+
+            </button>
+
+
+            <a href="profile.html" class="profile">
+
+                <div class="profile-avatar">
+                    S
+                </div>
+            
+                <div class="profile-info">
+                    <strong>Student</strong>
+                    <small>Student</small>
+                </div>
+            
+                <i class="fa-solid fa-chevron-down"></i>
+            
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         PAGE CONTENT
+    ========================== -->
+
+    <section class="page-content">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <div>
+
+                <span class="section-label">
+                    CAMPUS UPDATES
+                </span>
+
+                <h1>
+                    Notifications
+                </h1>
+
+                <p>
+                    Stay updated about your complaints and campus activities.
+                </p>
+
+            </div>
+
+
+            <button
+                class="mark-all-btn"
+                id="markAllButton"
+            >
+
+                <i class="fa-solid fa-check-double"></i>
+
+                Mark all as read
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             NOTIFICATION SUMMARY
+        ========================== -->
+
+        <div class="notification-summary">
+
+            <div class="summary-card">
+
+                <div class="summary-icon purple">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Notifications
+                    </span>
+
+                    <strong id="totalNotifications">
+                        6
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon blue">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Unread
+                    </span>
+
+                    <strong id="unreadNotifications">
+                        3
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon green">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Resolved Updates
+                    </span>
+
+                    <strong>
+                        2
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FILTER BAR
+        ========================== -->
+
+        <div class="filter-card">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search notifications..."
+                >
+
+            </div>
+
+
+            <select id="notificationFilter">
+
+                <option value="all">
+                    All Notifications
+                </option>
+
+                <option value="unread">
+                    Unread
+                </option>
+
+                <option value="read">
+                    Read
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- =========================
+             NOTIFICATIONS
+        ========================== -->
+
+        <div
+            class="notifications-container"
+            id="notificationsContainer"
+        >
+
+
+            <!-- NOTIFICATION 1 -->
+
+            <article
+                class="notification-card unread"
+                data-status="unread"
+            >
+
+                <div class="notification-icon progress-icon">
+
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            Complaint is now In Progress
+                        </h3>
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+
+                    <p>
+                        Your complaint
+                        <strong>
+                            "Water Leakage"
+                        </strong>
+                        has been assigned to the maintenance team.
+                    </p>
+
+
+                    <span class="notification-time">
+                        <i class="fa-regular fa-clock"></i>
+                        2 hours ago
+                    </span>
+
+                </div>
+
+
+                <div class="notification-actions">
+
+                    <button
+                        class="read-button"
+                        title="Mark as read"
+                    >
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+
+                    <button
+                        class="delete-button"
+                        title="Delete"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- NOTIFICATION 2 -->
+
+            <article
+                class="notification-card unread"
+                data-status="unread"
+            >
+
+                <div class="notification-icon resolved-icon">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            Complaint Resolved
+                        </h3>
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+
+                    <p>
+                        Your complaint
+                        <strong>
+                            "Wi-Fi Connection Issue"
+                        </strong>
+                        has been successfully resolved.
+                    </p>
+
+
+                    <span class="notification-time">
+                        <i class="fa-regular fa-clock"></i>
+                        Yesterday
+                    </span>
+
+                </div>
+
+
+                <div class="notification-actions">
+
+                    <button
+                        class="read-button"
+                        title="Mark as read"
+                    >
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+
+                    <button
+                        class="delete-button"
+                        title="Delete"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- NOTIFICATION 3 -->
+
+            <article
+                class="notification-card unread"
+                data-status="unread"
+            >
+
+                <div class="notification-icon warning-icon">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            Maintenance Update
+                        </h3>
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+
+                    <p>
+                        Electrical maintenance is scheduled
+                        for Block A tomorrow from 10:00 AM.
+                    </p>
+
+
+                    <span class="notification-time">
+                        <i class="fa-regular fa-clock"></i>
+                        Yesterday
+                    </span>
+
+                </div>
+
+
+                <div class="notification-actions">
+
+                    <button
+                        class="read-button"
+                        title="Mark as read"
+                    >
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+
+                    <button
+                        class="delete-button"
+                        title="Delete"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- NOTIFICATION 4 -->
+
+            <article
+                class="notification-card"
+                data-status="read"
+            >
+
+                <div class="notification-icon report-icon">
+
+                    <i class="fa-solid fa-file-circle-plus"></i>
+
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            Complaint Submitted
+                        </h3>
+
+                    </div>
+
+
+                    <p>
+                        Your complaint
+                        <strong>
+                            "Classroom Light Not Working"
+                        </strong>
+                        was successfully submitted.
+                    </p>
+
+
+                    <span class="notification-time">
+                        <i class="fa-regular fa-clock"></i>
+                        Aug 30, 2026
+                    </span>
+
+                </div>
+
+
+                <div class="notification-actions">
+
+                    <button
+                        class="delete-button"
+                        title="Delete"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- NOTIFICATION 5 -->
+
+            <article
+                class="notification-card"
+                data-status="read"
+            >
+
+                <div class="notification-icon resolved-icon">
+
+                    <i class="fa-solid fa-star"></i>
+
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            We'd Love Your Feedback
+                        </h3>
+
+                    </div>
+
+
+                    <p>
+                        Your complaint has been resolved.
+                        Please take a moment to rate our service.
+                    </p>
+
+
+                    <span class="notification-time">
+                        <i class="fa-regular fa-clock"></i>
+                        Aug 29, 2026
+                    </span>
+
+                </div>
+
+
+                <div class="notification-actions">
+
+                    <button
+                        class="delete-button"
+                        title="Delete"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- NOTIFICATION 6 -->
+
+            <article
+                class="notification-card"
+                data-status="read"
+            >
+
+                <div class="notification-icon info-icon">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            Welcome to CampusFix
+                        </h3>
+
+                    </div>
+
+
+                    <p>
+                        You can now report campus issues
+                        and track their progress from your dashboard.
+                    </p>
+
+
+                    <span class="notification-time">
+                        <i class="fa-regular fa-clock"></i>
+                        Aug 28, 2026
+                    </span>
+
+                </div>
+
+
+                <div class="notification-actions">
+
+                    <button
+                        class="delete-button"
+                        title="Delete"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- NO RESULTS -->
+
+        <div
+            class="no-results"
+            id="noResults"
+        >
+
+            <div class="no-results-icon">
+
+                <i class="fa-regular fa-bell-slash"></i>
+
+            </div>
+
+            <h3>
+                No notifications found
+            </h3>
+
+            <p>
+                Try changing your search or filter.
+            </p>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<script src="notifications.js"></script>
+
+</body>
+
+</html>

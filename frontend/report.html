@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Report an Issue | CampusFix</title>
+
+<link rel="stylesheet" href="report.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+        <div class="logo-icon">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+
+        <span>Campus<span>Fix</span></span>
+    </div>
+
+    <div class="menu-title">MAIN MENU</div>
+
+    <nav class="sidebar-nav">
+
+        <a href="student-dashboard.html" class="nav-link" id="dashboardLink">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="report.html" class="nav-link active">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>Report Issue</span>
+        </a>
+
+        <a href="complaints.html" class="nav-link" id="complaintsLink">
+            <i class="fa-solid fa-list-check"></i>
+            <span>My Complaints</span>
+            <span class="notification-count">3</span>
+        </a>
+
+        <a href="notifications.html" class="nav-link">
+            <i class="fa-regular fa-bell"></i>
+            <span>Notifications</span>
+            <span class="notification-count">3</span>
+        </a>
+
+    </nav>
+
+    <div class="menu-title account-title">ACCOUNT</div>
+
+    <nav class="sidebar-nav">
+
+        <a href="profile.html" class="nav-link">
+            <i class="fa-regular fa-user"></i>
+            <span>My Profile</span>
+        </a>
+
+        <a href="settings.html" class="nav-link">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="help-card">
+            <div class="help-icon">
+                <i class="fa-regular fa-circle-question"></i>
+            </div>
+
+            <strong>Need Help?</strong>
+
+            <p>We're here to help you.</p>
+
+            <button>
+                Contact Support
+            </button>
+        </div>
+
+        <button class="logout-btn" id="logoutButton">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            Logout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button class="menu-button" id="menuButton">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+                <span class="breadcrumb">Dashboard</span>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span class="current-page">Report Issue</span>
+            </div>
+
+        </div>
+
+        <div class="topbar-right">
+
+            <a href="notifications.html" class="top-icon"> 
+                <i class="fa-regular fa-bell"></i> 
+                <span></span> 
+            </a>
+
+            <a href="profile.html" class="profile">
+                <div class="profile-avatar">
+                    S
+                </div>
+
+                <div class="profile-info">
+                    <strong>Student</strong>
+                    <small>Student</small>
+                </div>
+
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- PAGE CONTENT -->
+    <section class="page-content">
+
+        <div class="page-heading">
+
+            <div>
+                <h1>Report an Issue</h1>
+
+                <p>
+                    Help us improve your campus by reporting
+                    maintenance issues.
+                </p>
+            </div>
+
+            <button class="back-button" id="backButton">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Dashboard
+            </button>
+
+        </div>
+
+
+        <!-- FORM CARD -->
+        <div class="form-card">
+
+            <div class="form-header">
+
+                <div class="form-header-icon">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </div>
+
+                <div>
+                    <h2>Issue Details</h2>
+                    <p>Provide accurate information about the problem.</p>
+                </div>
+
+            </div>
+
+
+            <form id="reportForm">
+
+                <!-- TITLE -->
+                <div class="form-group">
+
+                    <label for="title">
+                        Issue Title
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Example: Classroom light not working"
+                        maxlength="100"
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY + PRIORITY -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Category
+                            <span>*</span>
+                        </label>
+
+                        <div class="select-wrapper">
+
+                            <select id="category">
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="Electrical">
+                                    Electrical
+                                </option>
+
+                                <option value="Plumbing">
+                                    Plumbing
+                                </option>
+
+                                <option value="Internet">
+                                    Internet / Wi-Fi
+                                </option>
+
+                                <option value="Furniture">
+                                    Furniture
+                                </option>
+
+                                <option value="Cleanliness">
+                                    Cleanliness
+                                </option>
+
+                                <option value="Security">
+                                    Security
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="priority">
+                            Priority
+                            <span>*</span>
+                        </label>
+
+                        <div class="select-wrapper">
+
+                            <select id="priority">
+
+                                <option value="">
+                                    Select priority
+                                </option>
+
+                                <option value="Low">
+                                    Low
+                                </option>
+
+                                <option value="Medium">
+                                    Medium
+                                </option>
+
+                                <option value="High">
+                                    High
+                                </option>
+
+                                <option value="Urgent">
+                                    Urgent
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION -->
+                <div class="form-group">
+
+                    <label for="location">
+                        Location
+                        <span>*</span>
+                    </label>
+
+                    <div class="input-with-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <input
+                            type="text"
+                            id="location"
+                            placeholder="Example: Block A, Room 204"
+                            maxlength="150"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+                <div class="form-group">
+
+                    <div class="label-row">
+
+                        <label for="description">
+                            Description
+                            <span>*</span>
+                        </label>
+
+                        <small id="characterCount">
+                            0 / 500 characters
+                        </small>
+
+                    </div>
+
+                    <textarea
+                        id="description"
+                        maxlength="500"
+                        placeholder="Describe the issue in detail..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- PHOTO UPLOAD -->
+                <div class="form-group">
+
+                    <label>
+                        Add Photo
+                        <small>(Optional)</small>
+                    </label>
+
+                    <div class="upload-area" id="uploadArea">
+
+                        <input
+                            type="file"
+                            id="photo"
+                            accept="image/*"
+                            hidden
+                        >
+
+                        <label for="photo" class="upload-content">
+
+                            <div class="upload-icon">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+
+                            <strong>
+                                Upload a photo
+                            </strong>
+
+                            <p>
+                                Click to browse or drag & drop
+                            </p>
+
+                            <small>
+                                PNG, JPG or JPEG • Max 5MB
+                            </small>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- IMAGE PREVIEW -->
+                    <div class="image-preview" id="imagePreview">
+
+                        <img
+                            id="previewImage"
+                            src=""
+                            alt="Selected image"
+                        >
+
+                        <button
+                            type="button"
+                            id="removeImage"
+                            class="remove-image"
+                        >
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORM FOOTER -->
+                <div class="form-footer">
+
+                    <p>
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Your complaint information is kept secure.
+                    </p>
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                        id="submitButton"
+                    >
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Submit Complaint
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="report.js"></script>
+
+</body>
+</html>

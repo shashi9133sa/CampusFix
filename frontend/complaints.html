@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>My Complaints | CampusFix</title>
+
+<link rel="stylesheet" href="complaints.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     SIDEBAR
+========================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+
+        <span>Campus<span>Fix</span></span>
+
+    </div>
+
+
+    <div class="menu-title">
+        MAIN MENU
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a href="student-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+        </a>
+
+
+        <a href="report.html" class="nav-link">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>Report Issue</span>
+        </a>
+
+
+        <a href="complaints.html" class="nav-link active">
+            <i class="fa-solid fa-list-check"></i>
+            <span>My Complaints</span>
+
+            <span class="notification-count">
+                3
+            </span>
+        </a>
+
+
+        <a href="notifications.html" class="nav-link">
+            <i class="fa-regular fa-bell"></i>
+            <span>Notifications</span>
+
+            <span class="notification-count">
+                3
+            </span>
+        </a>
+
+    </nav>
+
+
+    <div class="menu-title account-title">
+        ACCOUNT
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a href="profile.html" class="nav-link">
+            <i class="fa-regular fa-user"></i>
+            <span>My Profile</span>
+        </a>
+
+
+        <a href="settings.html" class="nav-link">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="help-card">
+
+            <div class="help-icon">
+                <i class="fa-regular fa-circle-question"></i>
+            </div>
+
+            <strong>Need Help?</strong>
+
+            <p>
+                We're here to help you.
+            </p>
+
+            <button>
+                Contact Support
+            </button>
+
+        </div>
+
+
+        <button class="logout-btn" id="logoutButton">
+
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================== -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button class="menu-button" id="menuButton">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div>
+
+                <span class="breadcrumb">
+                    Dashboard
+                </span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+                <span class="current-page">
+                    My Complaints
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <a href="notifications.html" class="top-icon">
+                <i class="fa-regular fa-bell"></i>
+                <span></span>
+            </a>
+
+            <a href="profile.html" class="profile">
+
+                <div class="profile-avatar">
+                    S
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>
+                        Student
+                    </strong>
+
+                    <small>
+                        Student
+                    </small>
+
+                </div>
+
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         PAGE CONTENT
+    ========================== -->
+
+    <section class="page-content">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <div>
+
+                <span class="section-label">
+                    COMPLAINT MANAGEMENT
+                </span>
+
+                <h1>
+                    My Complaints
+                </h1>
+
+                <p>
+                    Track and manage all the issues you have reported.
+                </p>
+
+            </div>
+
+
+            <a href="report.html" class="new-complaint-btn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Report New Issue
+
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             FILTER BAR
+        ========================== -->
+
+        <div class="filter-card">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search complaints..."
+                >
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <select id="statusFilter">
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="progress">
+                        In Progress
+                    </option>
+
+                    <option value="resolved">
+                        Resolved
+                    </option>
+
+                </select>
+
+
+                <select id="categoryFilter">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="Electrical">
+                        Electrical
+                    </option>
+
+                    <option value="Plumbing">
+                        Plumbing
+                    </option>
+
+                    <option value="Internet">
+                        Internet / Wi-Fi
+                    </option>
+
+                    <option value="Furniture">
+                        Furniture
+                    </option>
+
+                    <option value="Cleanliness">
+                        Cleanliness
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             COMPLAINTS LIST
+        ========================== -->
+
+        <div class="complaints-container" id="complaintsContainer">
+
+
+            <!-- COMPLAINT 1 -->
+
+            <article
+                class="complaint-card"
+                data-status="pending"
+                data-category="Electrical"
+            >
+
+                <div class="complaint-icon electrical">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                </div>
+
+
+                <div class="complaint-details">
+
+                    <div class="complaint-title-row">
+
+                        <h3>
+                            Classroom Light Not Working
+                        </h3>
+
+                        <span class="status pending">
+                            Pending
+                        </span>
+
+                    </div>
+
+
+                    <p class="complaint-description">
+
+                        The ceiling lights in the classroom
+                        are not working properly.
+
+                    </p>
+
+
+                    <div class="complaint-meta">
+
+                        <span>
+                            <i class="fa-solid fa-location-dot"></i>
+                            Block A • Room 204
+                        </span>
+
+                        <span>
+                            <i class="fa-regular fa-calendar"></i>
+                            Aug 30, 2026
+                        </span>
+
+                        <span>
+                            <i class="fa-solid fa-tag"></i>
+                            Electrical
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button class="view-button">
+
+                    View Details
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </article>
+
+
+            <!-- COMPLAINT 2 -->
+
+            <article
+                class="complaint-card"
+                data-status="progress"
+                data-category="Plumbing"
+            >
+
+                <div class="complaint-icon plumbing">
+
+                    <i class="fa-solid fa-droplet"></i>
+
+                </div>
+
+
+                <div class="complaint-details">
+
+                    <div class="complaint-title-row">
+
+                        <h3>
+                            Water Leakage
+                        </h3>
+
+                        <span class="status progress">
+                            In Progress
+                        </span>
+
+                    </div>
+
+
+                    <p class="complaint-description">
+
+                        Water is leaking from the ceiling
+                        on the second floor.
+
+                    </p>
+
+
+                    <div class="complaint-meta">
+
+                        <span>
+                            <i class="fa-solid fa-location-dot"></i>
+                            Block B • 2nd Floor
+                        </span>
+
+                        <span>
+                            <i class="fa-regular fa-calendar"></i>
+                            Aug 28, 2026
+                        </span>
+
+                        <span>
+                            <i class="fa-solid fa-tag"></i>
+                            Plumbing
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button class="view-button">
+
+                    View Details
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </article>
+
+
+            <!-- COMPLAINT 3 -->
+
+            <article
+                class="complaint-card"
+                data-status="resolved"
+                data-category="Internet"
+            >
+
+                <div class="complaint-icon internet">
+
+                    <i class="fa-solid fa-wifi"></i>
+
+                </div>
+
+
+                <div class="complaint-details">
+
+                    <div class="complaint-title-row">
+
+                        <h3>
+                            Wi-Fi Connection Issue
+                        </h3>
+
+                        <span class="status resolved">
+                            Resolved
+                        </span>
+
+                    </div>
+
+
+                    <p class="complaint-description">
+
+                        Internet connection was unstable
+                        in the central library.
+
+                    </p>
+
+
+                    <div class="complaint-meta">
+
+                        <span>
+                            <i class="fa-solid fa-location-dot"></i>
+                            Central Library
+                        </span>
+
+                        <span>
+                            <i class="fa-regular fa-calendar"></i>
+                            Aug 25, 2026
+                        </span>
+
+                        <span>
+                            <i class="fa-solid fa-tag"></i>
+                            Internet
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button class="view-button">
+
+                    View Details
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </article>
+
+
+            <!-- COMPLAINT 4 -->
+
+            <article
+                class="complaint-card"
+                data-status="resolved"
+                data-category="Furniture"
+            >
+
+                <div class="complaint-icon furniture">
+
+                    <i class="fa-solid fa-chair"></i>
+
+                </div>
+
+
+                <div class="complaint-details">
+
+                    <div class="complaint-title-row">
+
+                        <h3>
+                            Damaged Classroom Chair
+                        </h3>
+
+                        <span class="status resolved">
+                            Resolved
+                        </span>
+
+                    </div>
+
+
+                    <p class="complaint-description">
+
+                        One of the classroom chairs is
+                        damaged and unsafe to use.
+
+                    </p>
+
+
+                    <div class="complaint-meta">
+
+                        <span>
+                            <i class="fa-solid fa-location-dot"></i>
+                            Block C • Room 108
+                        </span>
+
+                        <span>
+                            <i class="fa-regular fa-calendar"></i>
+                            Aug 22, 2026
+                        </span>
+
+                        <span>
+                            <i class="fa-solid fa-tag"></i>
+                            Furniture
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button class="view-button">
+
+                    View Details
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- NO RESULTS -->
+
+        <div class="no-results" id="noResults">
+
+            <div class="no-results-icon">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+            <h3>
+                No complaints found
+            </h3>
+
+            <p>
+                Try changing your search or filter.
+            </p>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<script src="complaints.js"></script>
+```
+
+</body>
+
+</html>

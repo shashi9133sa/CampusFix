@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | CampusFix</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+
+    <div class="settings-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="student-dashboard.html" class="logo">
+
+                    <span class="logo-icon">
+                        <i class="fa-solid fa-wrench"></i>
+                    </span>
+
+                    <span>
+                        Campus<span>Fix</span>
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <div class="menu-title">
+                    MAIN MENU
+                </div>
+
+                <a href="student-dashboard.html" class="nav-link">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="report.html" class="nav-link">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>Report Issue</span>
+                </a>
+
+                <a href="complaints.html" class="nav-link">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>My Complaints</span>
+                </a>
+
+                <a href="notifications.html" class="nav-link">
+                    <i class="fa-regular fa-bell"></i>
+                    <span>Notifications</span>
+
+                    <span class="notification-count">
+                        3
+                    </span>
+                </a>
+
+            </nav>
+
+
+            <div class="menu-title account-title">
+                ACCOUNT
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <a href="profile.html" class="nav-link">
+                    <i class="fa-regular fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+
+                <a href="settings.html" class="nav-link active">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <div class="help-card">
+
+                    <div class="help-icon">
+                        <i class="fa-regular fa-circle-question"></i>
+                    </div>
+
+                    <strong>
+                        Need Help?
+                    </strong>
+
+                    <p>
+                        We're here to help you.
+                    </p>
+
+                    <button type="button">
+                        Contact Support
+                    </button>
+
+                </div>
+
+
+                <button
+                    class="logout-btn"
+                    id="logoutButton"
+                    type="button"
+                >
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <button
+                        class="menu-button"
+                        id="menuButton"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+
+                    <div class="breadcrumb-area">
+
+                        <span class="breadcrumb">
+                            Dashboard
+                        </span>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                        <span class="current-page">
+                            Settings
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="topbar-right">
+
+                    <a
+                        href="notifications.html"
+                        class="top-icon"
+                        aria-label="Notifications"
+                    >
+                        <i class="fa-regular fa-bell"></i>
+                        <span></span>
+                    </a>
+
+
+                    <div class="profile-mini">
+
+                        <div class="profile-avatar">
+                            S
+                        </div>
+
+                        <div class="profile-info">
+
+                            <strong>
+                                Student
+                            </strong>
+
+                            <small>
+                                Student Account
+                            </small>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- PAGE CONTENT -->
+
+            <section class="page-content">
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            PREFERENCES
+                        </span>
+
+                        <h1>
+                            Settings
+                        </h1>
+
+                        <p>
+                            Manage your CampusFix preferences and notifications.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SETTINGS GRID -->
+
+                <div class="settings-grid">
+
+
+                    <!-- NOTIFICATION SETTINGS -->
+
+                    <div class="settings-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    NOTIFICATIONS
+                                </span>
+
+                                <h2>
+                                    Notification Preferences
+                                </h2>
+
+                            </div>
+
+                            <div class="card-icon">
+                                <i class="fa-regular fa-bell"></i>
+                            </div>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-text">
+
+                                <strong>
+                                    Complaint Updates
+                                </strong>
+
+                                <span>
+                                    Receive updates when your complaint status changes.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="complaintNotifications"
+                                    checked
+                                >
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-text">
+
+                                <strong>
+                                    Campus Announcements
+                                </strong>
+
+                                <span>
+                                    Receive important campus maintenance announcements.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="campusAnnouncements"
+                                    checked
+                                >
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-text">
+
+                                <strong>
+                                    Feedback Reminders
+                                </strong>
+
+                                <span>
+                                    Get reminders to rate resolved complaints.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="feedbackReminders"
+                                    checked
+                                >
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- APPEARANCE -->
+
+                    <div class="settings-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    APPEARANCE
+                                </span>
+
+                                <h2>
+                                    Display Preferences
+                                </h2>
+
+                            </div>
+
+                            <div class="card-icon">
+                                <i class="fa-solid fa-palette"></i>
+                            </div>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-text">
+
+                                <strong>
+                                    Dark Mode
+                                </strong>
+
+                                <span>
+                                    Use the dark CampusFix interface.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="darkMode"
+                                    checked
+                                >
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-text">
+
+                                <strong>
+                                    Compact View
+                                </strong>
+
+                                <span>
+                                    Display information using a more compact layout.
+                                </span>
+
+                            </div>
+
+                            <label class="switch">
+
+                                <input
+                                    type="checkbox"
+                                    id="compactView"
+                                >
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRIVACY -->
+
+                    <div class="settings-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    PRIVACY
+                                </span>
+
+                                <h2>
+                                    Privacy & Security
+                                </h2>
+
+                            </div>
+
+                            <div class="card-icon">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+
+                        </div>
+
+
+                        <div class="security-item">
+
+                            <div class="security-icon">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Account Security
+                                </strong>
+
+                                <span>
+                                    Your account is protected.
+                                </span>
+
+                            </div>
+
+                            <span class="security-status">
+                                Secure
+                            </span>
+
+                        </div>
+
+
+                        <div class="security-item">
+
+                            <div class="security-icon">
+                                <i class="fa-solid fa-key"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Password
+                                </strong>
+
+                                <span>
+                                    Password management will be available later.
+                                </span>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="action-button"
+                                id="passwordButton"
+                            >
+                                Manage
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACCOUNT -->
+
+                    <div class="settings-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    ACCOUNT
+                                </span>
+
+                                <h2>
+                                    Account Actions
+                                </h2>
+
+                            </div>
+
+                            <div class="card-icon">
+                                <i class="fa-solid fa-user-gear"></i>
+                            </div>
+
+                        </div>
+
+
+                        <div class="account-actions">
+
+                            <a
+                                href="profile.html"
+                                class="account-action"
+                            >
+
+                                <div class="action-icon">
+                                    <i class="fa-regular fa-user"></i>
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        View Profile
+                                    </strong>
+
+                                    <span>
+                                        View your account information.
+                                    </span>
+
+                                </div>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </a>
+
+
+                            <button
+                                type="button"
+                                class="account-action danger"
+                                id="logoutSettingsButton"
+                            >
+
+                                <div class="action-icon">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Logout
+                                    </strong>
+
+                                    <span>
+                                        Sign out of your CampusFix account.
+                                    </span>
+
+                                </div>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SAVE BAR -->
+
+                <div class="save-bar">
+
+                    <div>
+
+                        <strong>
+                            Settings
+                        </strong>
+
+                        <p>
+                            Changes are currently saved locally.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="saveSettings"
+                    >
+                        <i class="fa-solid fa-check"></i>
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="settings.js"></script>
+
+</body>
+
+</html>
+```

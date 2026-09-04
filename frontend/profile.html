@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | CampusFix</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+
+    <div class="profile-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="student-dashboard.html" class="logo">
+
+                    <span class="logo-icon">
+                        <i class="fa-solid fa-wrench"></i>
+                    </span>
+
+                    <span>
+                        Campus<span>Fix</span>
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <div class="menu-title">
+                    MAIN MENU
+                </div>
+
+                <a href="student-dashboard.html" class="nav-link">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="report.html" class="nav-link">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>Report Issue</span>
+                </a>
+
+                <a href="complaints.html" class="nav-link">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>My Complaints</span>
+                </a>
+
+                <a href="notifications.html" class="nav-link">
+                    <i class="fa-regular fa-bell"></i>
+                    <span>Notifications</span>
+
+                    <span class="notification-count">
+                        3
+                    </span>
+                </a>
+
+            </nav>
+
+
+            <div class="menu-title account-title">
+                ACCOUNT
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="profile.html" class="nav-link active">
+                    <i class="fa-regular fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+
+                <a href="settings.html" class="nav-link">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <div class="help-card">
+
+                    <div class="help-icon">
+                        <i class="fa-regular fa-circle-question"></i>
+                    </div>
+
+                    <strong>
+                        Need Help?
+                    </strong>
+
+                    <p>
+                        We're here to help you.
+                    </p>
+
+                    <button type="button">
+                        Contact Support
+                    </button>
+
+                </div>
+
+
+                <button
+                    class="logout-btn"
+                    id="logoutButton"
+                    type="button"
+                >
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <button
+                        class="menu-button"
+                        id="menuButton"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+
+                    <div class="breadcrumb-area">
+
+                        <span class="breadcrumb">
+                            Dashboard
+                        </span>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                        <span class="current-page">
+                            My Profile
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="topbar-right">
+
+                    <a
+                        href="notifications.html"
+                        class="top-icon"
+                        aria-label="Notifications"
+                    >
+                        <i class="fa-regular fa-bell"></i>
+                        <span></span>
+                    </a>
+
+
+                    <div class="profile-mini">
+
+                        <div class="profile-avatar">
+                            S
+                        </div>
+
+                        <div class="profile-info">
+
+                            <strong>
+                                Student
+                            </strong>
+
+                            <small>
+                                Student Account
+                            </small>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- PAGE CONTENT -->
+
+            <section class="page-content">
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            ACCOUNT
+                        </span>
+
+                        <h1>
+                            My Profile
+                        </h1>
+
+                        <p>
+                            Manage your personal information and account details.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROFILE HERO -->
+
+                <div class="profile-hero">
+
+                    <div class="profile-large-avatar">
+                        S
+                    </div>
+
+                    <div class="profile-hero-info">
+
+                        <span class="profile-status">
+                            <span></span>
+                            Active Student
+                        </span>
+
+                        <h2>
+                            Student
+                        </h2>
+
+                        <p>
+                            Student Account
+                        </p>
+
+                    </div>
+
+                    <div class="profile-id">
+
+                        <span>
+                            STUDENT ID
+                        </span>
+
+                        <strong>
+                            CF-2026-001
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROFILE GRID -->
+
+                <div class="profile-grid">
+
+
+                    <!-- PERSONAL INFORMATION -->
+
+                    <div class="profile-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    PERSONAL INFORMATION
+                                </span>
+
+                                <h2>
+                                    Basic Details
+                                </h2>
+
+                            </div>
+
+                            <i class="fa-regular fa-user"></i>
+
+                        </div>
+
+
+                        <div class="details-grid">
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Full Name
+                                </span>
+
+                                <strong>
+                                    Student
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Student ID
+                                </span>
+
+                                <strong>
+                                    CF-2026-001
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Department
+                                </span>
+
+                                <strong>
+                                    Computer Science
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Year
+                                </span>
+
+                                <strong>
+                                    3rd Year
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONTACT INFORMATION -->
+
+                    <div class="profile-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    CONTACT
+                                </span>
+
+                                <h2>
+                                    Contact Details
+                                </h2>
+
+                            </div>
+
+                            <i class="fa-regular fa-address-card"></i>
+
+                        </div>
+
+
+                        <div class="details-grid">
+
+                            <div class="detail-item full-width">
+
+                                <span>
+                                    Email Address
+                                </span>
+
+                                <strong>
+                                    student@campusfix.edu
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Phone Number
+                                </span>
+
+                                <strong>
+                                    +91 XXXXX XXXXX
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Account Type
+                                </span>
+
+                                <strong>
+                                    Student
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- COMPLAINT STATISTICS -->
+
+                    <div class="profile-card statistics-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    ACTIVITY
+                                </span>
+
+                                <h2>
+                                    Complaint Statistics
+                                </h2>
+
+                            </div>
+
+                            <i class="fa-solid fa-chart-simple"></i>
+
+                        </div>
+
+
+                        <div class="profile-statistics">
+
+                            <div class="profile-stat">
+
+                                <strong>
+                                    12
+                                </strong>
+
+                                <span>
+                                    Total Reports
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-stat">
+
+                                <strong>
+                                    3
+                                </strong>
+
+                                <span>
+                                    Pending
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-stat">
+
+                                <strong>
+                                    2
+                                </strong>
+
+                                <span>
+                                    In Progress
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-stat">
+
+                                <strong>
+                                    7
+                                </strong>
+
+                                <span>
+                                    Resolved
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACCOUNT INFORMATION -->
+
+                    <div class="profile-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    ACCOUNT
+                                </span>
+
+                                <h2>
+                                    Account Information
+                                </h2>
+
+                            </div>
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                        </div>
+
+
+                        <div class="account-info">
+
+                            <div class="account-row">
+
+                                <div>
+
+                                    <span>
+                                        Account Status
+                                    </span>
+
+                                    <strong>
+                                        Active
+                                    </strong>
+
+                                </div>
+
+                                <span class="status-badge">
+                                    Active
+                                </span>
+
+                            </div>
+
+
+                            <div class="account-row">
+
+                                <div>
+
+                                    <span>
+                                        Member Since
+                                    </span>
+
+                                    <strong>
+                                        August 2026
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="account-row">
+
+                                <div>
+
+                                    <span>
+                                        Last Activity
+                                    </span>
+
+                                    <strong>
+                                        Today
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFO BANNER -->
+
+                <div class="profile-info-banner">
+
+                    <div class="banner-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Your information is secure
+                        </strong>
+
+                        <p>
+                            Profile editing and account security
+                            controls will be connected to the backend later.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="profile.js"></script>
+
+</body>
+
+</html>
+```
