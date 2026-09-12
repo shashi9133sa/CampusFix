@@ -109,7 +109,7 @@ async function loadAdminProfile() {
 
             const response =
                 await fetch(
-                    `http://localhost:5000/api/users/${user.id}`
+                    `https://campusfix-obdm.onrender.com/api/users/${user.id}`
                 );
 
 

@@ -438,7 +438,7 @@ async function loadBackendNotifications() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/complaints/all"
+            "https://campusfix-obdm.onrender.com/api/complaints/all"
         );
 
         if (!response.ok) {
@@ -728,4 +728,5 @@ function escapeHTML(value) {
 
 loadBackendNotifications();
 });
+
 

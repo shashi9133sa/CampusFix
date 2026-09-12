@@ -96,7 +96,7 @@ async function loadUserProfile() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/users/1"
+            "https://campusfix-obdm.onrender.com/api/users/1"
         );
 
 
@@ -212,7 +212,7 @@ async function loadUserProfile() {
 
 const complaintsResponse =
     await fetch(
-        "http://localhost:5000/api/complaints/all"
+        "https://campusfix-obdm.onrender.com/api/complaints/all"
     );
 
 if (!complaintsResponse.ok) {
