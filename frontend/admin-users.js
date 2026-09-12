@@ -131,11 +131,17 @@
            }
    
            allUsers =
-               await response.json();
-   
-           updateSummary(allUsers);
-   
-           renderUsers(allUsers);
+    (await response.json()).filter(function (user) {
+
+        return String(
+            user.role || "student"
+        ).trim().toLowerCase() === "student";
+
+    });
+
+updateSummary(allUsers);
+
+renderUsers(allUsers);
    
        } catch (error) {
    
