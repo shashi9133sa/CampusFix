@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CampusFix | Students</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="admin-users.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="admin-sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+
+        <div>
+            <h2>CampusFix</h2>
+            <span>ADMIN PANEL</span>
+        </div>
+
+    </div>
+
+
+    <nav class="admin-nav">
+
+        <a
+            href="admin-dashboard.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+        </a>
+
+
+        <a
+            href="admin-complaints.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>All Complaints</span>
+        </a>
+
+
+        <a
+            href="admin-users.html"
+            class="admin-nav-item active"
+        >
+            <i class="fa-solid fa-users"></i>
+            <span>Students</span>
+        </a>
+
+
+        <a
+            href="admin-notifications.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+
+
+        <a
+            href="admin-profile.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Admin Profile</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="admin-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+                <strong>System Online</strong>
+                <small>CampusFix Server</small>
+            </div>
+
+        </div>
+
+
+        <button
+            class="logout-button"
+            id="logoutBtn"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="admin-main">
+
+
+    <header class="admin-topbar">
+
+        <div class="topbar-left">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+
+                <span class="page-label">
+                    USER MANAGEMENT
+                </span>
+
+                <h1>Students</h1>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <section class="admin-content">
+
+
+        <div class="page-intro">
+
+            <span class="section-label">
+                CAMPUS COMMUNITY
+            </span>
+
+            <h2>
+                Registered Students
+            </h2>
+
+            <p>
+                View students registered on the CampusFix platform.
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= SUMMARY ================= -->
+
+        <div class="user-summary">
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+
+                    <span>Total Students</span>
+
+                    <strong id="totalStudents">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+
+                <div>
+
+                    <span>Student Accounts</span>
+
+                    <strong id="studentAccounts">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= SEARCH ================= -->
+
+        <div class="user-toolbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="studentSearch"
+                    placeholder="Search students by name or email..."
+                >
+
+            </div>
+
+
+            <button
+                class="refresh-button"
+                id="refreshUsers"
+            >
+
+                <i class="fa-solid fa-rotate"></i>
+
+                Refresh
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ================= USER TABLE ================= -->
+
+        <div class="users-table-wrapper">
+
+            <table class="users-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+
+                        <th>Email</th>
+
+                        <th>Role</th>
+
+                        <th>Joined</th>
+
+                        <th>Account</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="usersTableBody">
+
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="loading-cell"
+                        >
+
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+
+                            Loading students...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<script src="admin-guard.js"></script>
+<script src="admin-users.js"></script>
+
+</body>
+
+</html>

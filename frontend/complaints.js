@@ -61,39 +61,82 @@ document.addEventListener("DOMContentLoaded", () => {
 // LOAD COMPLAINTS
 // =====================================================
 
-function loadComplaints() {
+async function loadComplaints() {
 
-    const container = document.getElementById("complaintsContainer");
+    const container =
+        document.getElementById("complaintsContainer");
 
     if (!container) return;
 
+    // Get logged-in student
+    let loggedInUser = null;
 
-    // Get saved complaints
+    try {
+        const savedUser =
+            localStorage.getItem("campusFixUser");
+
+        if (savedUser) {
+            loggedInUser = JSON.parse(savedUser);
+            console.log("Logged-in user:", loggedInUser);
+console.log("Student ID:", loggedInUser.id);
+        }
+    } catch (error) {
+        console.error("User data error:", error);
+    }
+
+    if (!loggedInUser || !loggedInUser.id) {
+        window.location.href = "login.html";
+        return;
+    }
 
     let savedComplaints = [];
 
     try {
-        savedComplaints =
-            JSON.parse(
-                localStorage.getItem("campusFixComplaints")
-            ) || [];
+
+        const response = await fetch(
+            "http://localhost:5000/api/complaints/all"
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch complaints");
+        }
+
+        savedComplaints = await response.json();
+
+        // Show only this student's complaints
+        savedComplaints = savedComplaints.filter(
+            complaint =>
+                Number(complaint.user_id) === Number(loggedInUser.id)
+        );
+
+        console.log(
+            "Student complaints loaded:",
+            savedComplaints
+        );
+
     } catch (error) {
-        console.error("Could not read complaints:", error);
+
+        console.error(
+            "Could not load complaints:",
+            error
+        );
+
+        container.innerHTML = `
+            <div style="text-align:center; padding:40px;">
+                <h3>Unable to load complaints</h3>
+                <p>Please make sure the CampusFix backend is running.</p>
+            </div>
+        `;
+
+        return;
     }
 
+    // Remove old dummy/static complaints
+container
+.querySelectorAll(".complaint-card")
+.forEach(card => card.remove());
 
-    console.log("Saved CampusFix complaints:", savedComplaints);
-
-
-    // Remove only previously generated cards
-
-    container
-        .querySelectorAll(".dynamic-complaint")
-        .forEach(card => card.remove());
-
-
-    // Create saved complaint cards
-
+    // Create complaint cards
     savedComplaints
         .slice()
         .reverse()
@@ -106,17 +149,12 @@ function loadComplaints() {
 
         });
 
-
-    // Connect ALL View Details buttons
-
+    // Connect View Details buttons
     initializeViewButtons();
 
-
     // Apply filters
-
     applyFilters();
 }
-
 
 // =====================================================
 // CREATE COMPLAINT CARD

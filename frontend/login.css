@@ -741,4 +741,82 @@
 
 .login-button:active {
     transform: scale(0.98);
+}/* =========================
+   ACCOUNT TYPE SWITCH
+========================= */
+
+.account-type {
+    margin-bottom: 22px;
+}
+
+.account-type-label {
+    display: block;
+    margin-bottom: 9px;
+    color: #dce1ea;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.account-switch {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 48px;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.035);
+    overflow: hidden;
+}
+
+.switch-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    border-radius: 9px;
+    background: rgba(124, 92, 255, 0.18);
+    border: 1px solid rgba(124, 92, 255, 0.3);
+    box-shadow: 0 5px 18px rgba(124, 92, 255, 0.12);
+    transition: transform 0.3s ease;
+    pointer-events: none;
+}
+
+.account-option {
+    position: relative;
+    z-index: 2;
+    border: 0;
+    background: transparent;
+    color: #7f899a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.account-option i {
+    font-size: 12px;
+}
+
+.account-option.active {
+    color: #ffffff;
+}
+
+
+/* Admin selected */
+
+.account-switch.admin-selected .switch-slider {
+    transform: translateX(100%);
+}
+
+.account-switch.admin-selected
+.account-option.active {
+    color: #ffffff;
 }

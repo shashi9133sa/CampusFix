@@ -1,13 +1,13 @@
-
 /* =========================================================
    CAMPUSFIX - PROFILE JAVASCRIPT
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+   document.addEventListener("DOMContentLoaded", function () {
 
     initializeMobileMenu();
     initializeLogout();
     initializeSidebarLinks();
+    loadUserProfile();
 
     console.log("👤 CampusFix Profile loaded successfully!");
 
@@ -89,6 +89,192 @@ function initializeSidebarLinks() {
 }
 
 
+/* ===================== LOAD USER PROFILE ===================== */
+
+async function loadUserProfile() {
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:5000/api/users/1"
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load user profile"
+            );
+
+        }
+
+
+        const user =
+            await response.json();
+
+
+        console.log(
+            "User profile:",
+            user
+        );
+
+
+        // Main profile name
+
+        const profileName =
+            document.getElementById("profileName");
+
+        if (profileName) {
+
+            profileName.textContent =
+                user.name;
+
+        }
+
+
+        // Full name
+
+        const profileFullName =
+            document.getElementById(
+                "profileFullName"
+            );
+
+        if (profileFullName) {
+
+            profileFullName.textContent =
+                user.name;
+
+        }
+
+
+        // Email
+
+        const profileEmail =
+            document.getElementById(
+                "profileEmail"
+            );
+
+        if (profileEmail) {
+
+            profileEmail.textContent =
+                user.email;
+
+        }
+
+
+        // Topbar name
+
+        const topProfileName =
+            document.getElementById(
+                "topProfileName"
+            );
+
+        if (topProfileName) {
+
+            topProfileName.textContent =
+                user.name;
+
+        }
+
+
+        // Topbar role
+
+        const topProfileRole =
+            document.getElementById(
+                "topProfileRole"
+            );
+
+        if (topProfileRole) {
+
+            topProfileRole.textContent =
+                user.role;
+
+        }
+
+
+        // Profile avatars
+
+        document
+            .querySelectorAll(
+                ".profile-avatar, .profile-large-avatar"
+            )
+            .forEach(function (avatar) {
+
+                avatar.textContent =
+                    user.name
+                        .charAt(0)
+                        .toUpperCase();
+
+            });
+            /* =====================
+   LOAD COMPLAINT STATS
+===================== */
+
+const complaintsResponse =
+    await fetch(
+        "http://localhost:5000/api/complaints/all"
+    );
+
+if (!complaintsResponse.ok) {
+    throw new Error(
+        "Failed to load complaint statistics"
+    );
+}
+
+const complaints =
+    await complaintsResponse.json();
+
+
+const total =
+    complaints.length;
+
+const pending =
+    complaints.filter(function (complaint) {
+        return complaint.status === "Pending";
+    }).length;
+
+const progress =
+    complaints.filter(function (complaint) {
+        return complaint.status === "In Progress";
+    }).length;
+
+const resolved =
+    complaints.filter(function (complaint) {
+        return complaint.status === "Resolved";
+    }).length;
+
+
+/* =====================
+   UPDATE STATISTICS
+===================== */
+
+const statistics =
+    document.querySelectorAll(
+        ".profile-stat strong"
+    );
+
+if (statistics.length >= 4) {
+
+    statistics[0].textContent = total;
+    statistics[1].textContent = pending;
+    statistics[2].textContent = progress;
+    statistics[3].textContent = resolved;
+
+}
+
+
+    } catch (error) {
+
+        console.error(
+            "Profile loading error:",
+            error
+        );
+
+    }
+
+}
+
+
 /* ===================== LOGOUT ===================== */
 
 function initializeLogout() {
@@ -102,29 +288,25 @@ function initializeLogout() {
     }
 
 
-    logoutButton.addEventListener("click", function () {
+    logoutButton.addEventListener(
+        "click",
+        function () {
 
-        const confirmLogout =
-            confirm(
-                "Are you sure you want to logout?"
-            );
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
 
 
-        if (!confirmLogout) {
-            return;
+            if (!confirmLogout) {
+                return;
+            }
+
+
+            window.location.href =
+                "login.html";
+
         }
-
-
-        /*
-         * TEMPORARY LOGOUT
-         *
-         * Backend authentication will replace
-         * this later.
-         */
-
-        window.location.href = "login.html";
-
-    });
+    );
 
 }
-

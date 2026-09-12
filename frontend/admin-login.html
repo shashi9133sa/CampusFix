@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | CampusFix</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="admin-login.css">
+</head>
+
+<body>
+
+    <div class="login-page">
+
+        <!-- Left Branding -->
+        <section class="login-brand">
+
+            <div class="brand-content">
+
+                <a href="index.html" class="brand-logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-wrench"></i>
+                    </div>
+
+                    <div>
+                        <strong>CampusFix</strong>
+                        <span>Smart Campus Maintenance</span>
+                    </div>
+                </a>
+
+
+                <div class="brand-message">
+
+                    <span class="eyebrow">
+                        ADMIN PORTAL
+                    </span>
+
+                    <h1>
+                        Manage your
+                        <span>campus.</span>
+                    </h1>
+
+                    <p>
+                        Monitor complaints, coordinate maintenance
+                        activities, and keep the campus running smoothly.
+                    </p>
+
+                </div>
+
+
+                <div class="brand-features">
+
+                    <div>
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Real-time complaint monitoring</span>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span>Maintenance management</span>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Secure administration</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Login Area -->
+        <section class="login-section">
+
+            <div class="login-card">
+
+                <div class="mobile-logo">
+
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-wrench"></i>
+                    </div>
+
+                    <strong>CampusFix</strong>
+
+                </div>
+
+
+                <div class="login-header">
+
+                    <span class="login-label">
+                        ADMIN ACCESS
+                    </span>
+
+                    <h2>Welcome back</h2>
+
+                    <p>
+                        Sign in to access the CampusFix
+                        administration panel.
+                    </p>
+
+                </div>
+
+
+                <form id="adminLoginForm">
+
+                    <div class="form-group">
+
+                        <label for="adminEmail">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="adminEmail"
+                                placeholder="admin@campusfix.edu"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="adminPassword">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="adminPassword"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                                aria-label="Show password">
+
+                                <i class="fa-regular fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="login-error"
+                        id="loginError">
+
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                        <span>
+                            Invalid administrator credentials.
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="adminLoginButton">
+
+                        <span>Sign In</span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </form>
+
+
+                <div class="login-footer">
+
+                    <a href="login.html">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Student Login
+                    </a>
+
+                    <span>•</span>
+
+                    <a href="index.html">
+                        Back to CampusFix
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script src="admin-login.js"></script>
+
+</body>
+</html>

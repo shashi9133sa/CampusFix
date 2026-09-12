@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CampusFix | Admin Profile</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="admin-profile.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="admin-sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+
+        <div>
+            <h2>CampusFix</h2>
+            <span>ADMIN PANEL</span>
+        </div>
+
+    </div>
+
+
+    <nav class="admin-nav">
+
+        <a
+            href="admin-dashboard.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+        </a>
+
+
+        <a
+            href="admin-complaints.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>All Complaints</span>
+        </a>
+
+
+        <a
+            href="admin-users.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-users"></i>
+            <span>Students</span>
+        </a>
+
+
+        <a
+            href="admin-notifications.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+
+
+        <a
+            href="admin-profile.html"
+            class="admin-nav-item active"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Admin Profile</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="admin-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+                <strong>System Online</strong>
+                <small>CampusFix Server</small>
+            </div>
+
+        </div>
+
+
+        <button
+            class="logout-button"
+            id="logoutBtn"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="admin-main">
+
+
+    <header class="admin-topbar">
+
+        <div class="topbar-left">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+
+                <span class="page-label">
+                    ADMINISTRATION
+                </span>
+
+                <h1>Admin Profile</h1>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <section class="admin-content">
+
+
+        <div class="page-intro">
+
+            <span class="section-label">
+                ACCOUNT MANAGEMENT
+            </span>
+
+            <h2>
+                Administrator Profile
+            </h2>
+
+            <p>
+                View your CampusFix administrator account
+                and system access information.
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= PROFILE ================= -->
+
+        <div class="profile-layout">
+
+
+            <!-- PROFILE CARD -->
+
+            <div class="profile-card">
+
+                <div class="profile-avatar">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                </div>
+
+
+                <h3 id="adminName">
+                    CampusFix Administrator
+                </h3>
+
+                <span class="profile-role">
+                    SYSTEM ADMINISTRATOR
+                </span>
+
+
+                <div class="profile-status">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        Active Account
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DETAILS -->
+
+            <div class="details-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            ACCOUNT DETAILS
+                        </span>
+
+                        <h3>
+                            Administrator Information
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="details-grid">
+
+
+                    <div class="detail-item">
+
+                        <span>
+                            Full Name
+                        </span>
+
+                        <strong id="profileName">
+                            CampusFix Administrator
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>
+                            Email Address
+                        </span>
+
+                        <strong id="profileEmail">
+                            admin@campusfix.com
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>
+                            Account Role
+                        </span>
+
+                        <strong id="profileRole">
+                            Administrator
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>
+                            Account ID
+                        </span>
+
+                        <strong id="profileId">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= ACCESS CARD ================= -->
+
+        <div class="access-card">
+
+            <div class="access-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+
+            <div class="access-content">
+
+                <span class="section-label">
+                    SYSTEM ACCESS
+                </span>
+
+                <h3>
+                    Administrator Privileges
+                </h3>
+
+                <p>
+                    This account has access to complaint
+                    management, student records, system
+                    notifications and CampusFix administration.
+                </p>
+
+            </div>
+
+
+            <div class="access-badge">
+                ADMIN ACCESS
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= SYSTEM INFO ================= -->
+
+        <div class="system-info-card">
+
+            <div class="card-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PLATFORM
+                    </span>
+
+                    <h3>
+                        CampusFix System
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="system-info-grid">
+
+
+                <div class="system-info-item">
+
+                    <i class="fa-solid fa-server"></i>
+
+                    <div>
+
+                        <span>
+                            Backend
+                        </span>
+
+                        <strong>
+                            Node.js + Express
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="system-info-item">
+
+                    <i class="fa-solid fa-database"></i>
+
+                    <div>
+
+                        <span>
+                            Database
+                        </span>
+
+                        <strong>
+                            MySQL
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="system-info-item">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <div>
+
+                        <span>
+                            System Status
+                        </span>
+
+                        <strong class="online-text">
+                            Online
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<script src="admin-guard.js"></script>
+<script src="admin-profile.js"></script>
+
+</body>
+
+</html>

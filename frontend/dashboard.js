@@ -145,22 +145,39 @@ function initializeLogout() {
    DASHBOARD DATA
 ========================= */
 
-function loadDashboardData() {
+async function loadDashboardData() {
 
-    const complaints =
-        JSON.parse(
-            localStorage.getItem(
-                "campusFixComplaints"
-            )
-        ) || [];
+    try {
 
+        const response = await fetch(
+            "http://localhost:5000/api/complaints/all"
+        );
 
-    updateStatistics(complaints);
+        if (!response.ok) {
+            throw new Error("Failed to fetch complaints");
+        }
 
-    updateRecentComplaints(complaints);
+        const complaints = await response.json();
+
+        console.log(
+            "Dashboard data from backend:",
+            complaints
+        );
+
+        updateStatistics(complaints);
+
+        updateRecentComplaints(complaints);
+
+    } catch (error) {
+
+        console.error(
+            "Could not load dashboard data:",
+            error
+        );
+
+    }
 
 }
-
 
 /* =========================
    STATISTICS
@@ -564,3 +581,12 @@ function escapeHTML(text) {
     return div.innerHTML;
 
 }
+/* =========================
+   AUTO REFRESH
+========================= */
+
+setInterval(function () {
+
+    loadDashboardData();
+
+}, 10000);

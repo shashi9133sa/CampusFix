@@ -1,478 +1,222 @@
-
 document.addEventListener("DOMContentLoaded", function () {
-    initializeMobileMenu();
-    initializePhotoPreview();
-    initializeReportForm();
-    initializeLogout();
-});
 
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-function initializeMobileMenu() {
-
+    const reportForm = document.getElementById("reportForm");
+    const photoInput = document.getElementById("photo");
+    const imagePreview = document.getElementById("imagePreview");
+    const previewImage = document.getElementById("previewImage");
+    const removeImage = document.getElementById("removeImage");
+    const submitButton = document.getElementById("submitButton");
+    const backButton = document.getElementById("backButton");
+    const logoutButton = document.getElementById("logoutButton");
     const menuButton = document.getElementById("menuButton");
     const sidebar = document.getElementById("sidebar");
 
-    if (!menuButton || !sidebar) return;
-
-    menuButton.addEventListener("click", function () {
-
-        sidebar.classList.toggle("open");
-
-        const icon = menuButton.querySelector("i");
-
-        if (!icon) return;
-
-        if (sidebar.classList.contains("open")) {
-            icon.classList.remove("fa-bars");
-            icon.classList.add("fa-xmark");
-        } else {
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
-        }
-
-    });
-}
-
-
-/* =========================
-   PHOTO PREVIEW
-========================= */
-
-function initializePhotoPreview() {
-
-    const photoInput = document.getElementById("photo");
-    const previewContainer = document.getElementById("imagePreview");
-    const previewImage = document.getElementById("previewImage");
-    const removeButton = document.getElementById("removeImage");
-
-    if (!photoInput || !previewContainer) return;
-
-    photoInput.addEventListener("change", function () {
-
-        const file = photoInput.files[0];
-
-        if (!file) return;
-
-        if (!file.type.startsWith("image/")) {
-
-            alert("Please select an image file.");
-
-            photoInput.value = "";
-
-            return;
-        }
-
-        if (file.size > 5 * 1024 * 1024) {
-
-            alert("Image must be smaller than 5MB.");
-
-            photoInput.value = "";
-
-            return;
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = function (event) {
-
-            if (previewImage) {
-                previewImage.src = event.target.result;
-            }
-
-            previewContainer.style.display = "block";
-
-        };
-
-        reader.readAsDataURL(file);
-
-    });
-
-
-    if (removeButton) {
-
-        removeButton.addEventListener("click", function () {
-
-            photoInput.value = "";
-
-            if (previewImage) {
-                previewImage.src = "";
-            }
-
-            previewContainer.style.display = "none";
-
-        });
-
-    }
-
-}
-
-
-/* =========================
-   REPORT FORM
-========================= */
-
-function initializeReportForm() {
-
-    const form = document.getElementById("reportForm");
-
-    if (!form) return;
-
-    form.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-
-        const titleInput =
-            document.getElementById("title");
-
-        const categoryInput =
-            document.getElementById("category");
-
-        const priorityInput =
-            document.getElementById("priority");
-
-        const locationInput =
-            document.getElementById("location");
-
-        const descriptionInput =
-            document.getElementById("description");
-
-        const photoInput =
-            document.getElementById("photo");
-
-
-        /* =========================
-           VALIDATION
-        ========================= */
-
-        const title =
-            titleInput.value.trim();
-
-        const category =
-            categoryInput.value;
-
-        const priority =
-            priorityInput.value;
-
-        const location =
-            locationInput.value.trim();
-
-        const description =
-            descriptionInput.value.trim();
-
-
-        if (!title) {
-
-            alert("Please enter an issue title.");
-            titleInput.focus();
-            return;
-
-        }
-
-
-        if (!category) {
-
-            alert("Please select a category.");
-            categoryInput.focus();
-            return;
-
-        }
-
-
-        if (!priority) {
-
-            alert("Please select a priority.");
-            priorityInput.focus();
-            return;
-
-        }
-
-
-        if (!location) {
-
-            alert("Please enter the location.");
-            locationInput.focus();
-            return;
-
-        }
-
-
-        if (!description) {
-
-            alert("Please describe the issue.");
-            descriptionInput.focus();
-            return;
-
-        }
-
-
-        /* =========================
-           CREATE COMPLAINT
-        ========================= */
-
-        const complaint = {
-
-            id:
-                "CF-" +
-                Date.now(),
-
-            title:
-                title,
-
-            category:
-                category,
-
-            priority:
-                priority,
-
-            location:
-                location,
-
-            description:
-                description,
-
-            status:
-                "Pending",
-
-            date:
-                new Date().toLocaleDateString(
-                    "en-IN",
-                    {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric"
-                    }
-                ),
-
-            createdAt:
-                new Date().toISOString(),
-
-            image:
-                null
-
-        };
-
-
-        /* =========================
-           SAVE IMAGE
-        ========================= */
-
-        if (
-            photoInput &&
-            photoInput.files &&
-            photoInput.files[0]
-        ) {
-
-            const file =
-                photoInput.files[0];
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload = function (event) {
-
-                complaint.image =
-                    event.target.result;
-
-                saveComplaint(complaint);
-
-            };
-
-
-            reader.readAsDataURL(file);
-
-        } else {
-
-            saveComplaint(complaint);
-
-        }
-
-    });
-
-}
-
-
-/* =========================
-   SAVE COMPLAINT
-========================= */
-
-function saveComplaint(complaint) {
-
-    let complaints = [];
+    // Get logged-in user
+    let loggedInUser = null;
 
     try {
+        const savedUser = localStorage.getItem("campusFixUser");
 
-        complaints =
-            JSON.parse(
-                localStorage.getItem(
-                    "campusFixComplaints"
-                )
-            ) || [];
-
+        if (savedUser) {
+            loggedInUser = JSON.parse(savedUser);
+        }
     } catch (error) {
-
-        complaints = [];
-
+        console.error("User data error:", error);
     }
 
-
-    complaints.unshift(complaint);
-
-
-    localStorage.setItem(
-        "campusFixComplaints",
-        JSON.stringify(complaints)
-    );
-
-
-    /* Verify save */
-
-    const saved =
-        JSON.parse(
-            localStorage.getItem(
-                "campusFixComplaints"
-            )
-        ) || [];
-
-
-    if (!saved.some(function (item) {
-        return item.id === complaint.id;
-    })) {
-
-        alert(
-            "There was a problem saving your complaint."
-        );
-
-        return;
-
+    // Mobile menu
+    if (menuButton && sidebar) {
+        menuButton.addEventListener("click", function () {
+            sidebar.classList.toggle("open");
+        });
     }
 
+    // Photo preview
+    if (photoInput) {
+        photoInput.addEventListener("change", function () {
+            const file = this.files[0];
 
-    showSuccessMessage(complaint.id);
+            if (!file) return;
 
+            const reader = new FileReader();
 
-    const form =
-        document.getElementById("reportForm");
+            reader.onload = function (event) {
+                previewImage.src = event.target.result;
+                imagePreview.style.display = "block";
+            };
 
-    if (form) {
-        form.reset();
+            reader.readAsDataURL(file);
+        });
     }
 
-
-    const preview =
-        document.getElementById("imagePreview");
-
-    if (preview) {
-        preview.style.display = "none";
+    // Remove photo
+    if (removeImage) {
+        removeImage.addEventListener("click", function () {
+            photoInput.value = "";
+            previewImage.src = "";
+            imagePreview.style.display = "none";
+        });
     }
 
-
-    const previewImage =
-        document.getElementById("previewImage");
-
-    if (previewImage) {
-        previewImage.src = "";
+    // Back button
+    if (backButton) {
+        backButton.addEventListener("click", function () {
+            window.location.href = "student-dashboard.html";
+        });
     }
 
+    // Logout
+    if (logoutButton) {
+        logoutButton.addEventListener("click", function () {
+            localStorage.removeItem("campusFixUser");
+            window.location.href = "login.html";
+        });
+    }
 
-    /* Redirect */
+    // Submit complaint
+    if (reportForm) {
+        reportForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
 
-    setTimeout(function () {
+            const title = document.getElementById("title").value.trim();
+            const category = document.getElementById("category").value;
+            const priority = document.getElementById("priority").value;
+            const location = document.getElementById("location").value.trim();
+            const description = document.getElementById("description").value.trim();
 
-        window.location.href =
-            "complaints.html";
+            if (!title || !category || !priority || !location || !description) {
+                alert("Please fill in all required fields.");
+                return;
+            }
 
-    }, 1500);
+            // Make sure student is logged in
+            if (!loggedInUser || !loggedInUser.id) {
+                alert("Please login before submitting a complaint.");
+                window.location.href = "login.html";
+                return;
+            }
 
-}
+            const complaintId = "CF-" + Date.now();
 
+            submitButton.disabled = true;
+            submitButton.textContent = "Submitting...";
 
-/* =========================
-   SUCCESS MESSAGE
-========================= */
+            try {
+                let imageData = null;
 
-function showSuccessMessage(complaintId) {
+                if (photoInput.files.length > 0) {
+                    imageData = await convertImageToBase64(photoInput.files[0]);
+                }
 
-    const message =
-        document.createElement("div");
+                const complaint = {
+                    id: complaintId,
+                    user_id: loggedInUser.id,
+                    title: title,
+                    category: category,
+                    priority: priority,
+                    location: location,
+                    description: description,
+                    status: "Pending",
+                    image: imageData
+                };
 
-    message.className =
-        "report-success";
+                const response = await fetch(
+                    "http://localhost:5000/api/complaints",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(complaint)
+                    }
+                );
 
-    message.innerHTML = `
+                const result = await response.json();
 
-        <div class="success-icon">
-            <i class="fa-solid fa-check"></i>
-        </div>
+                if (!response.ok) {
+                    throw new Error(
+                        result.message || "Failed to submit complaint"
+                    );
+                }
 
-        <div>
+                showSuccessMessage(result.complaintId);
 
-            <strong>
-                Complaint submitted successfully!
-            </strong>
+                reportForm.reset();
 
-            <p>
-                Complaint ID: ${complaintId}
-            </p>
+                if (imagePreview) {
+                    imagePreview.style.display = "none";
+                }
 
-        </div>
+                if (previewImage) {
+                    previewImage.src = "";
+                }
 
-    `;
+                setTimeout(function () {
+                    window.location.href = "complaints.html";
+                }, 1800);
 
+            } catch (error) {
+                console.error("Submission error:", error);
 
-    document.body.appendChild(message);
+                alert(
+                    "Unable to submit complaint. Please make sure the backend server is running."
+                );
 
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit Complaint";
+            }
+        });
+    }
 
-    setTimeout(function () {
+    // Convert image to Base64
+    function convertImageToBase64(file) {
+        return new Promise(function (resolve, reject) {
+            const reader = new FileReader();
 
-        message.classList.add("show");
+            reader.onload = function () {
+                resolve(reader.result);
+            };
 
-    }, 50);
+            reader.onerror = function () {
+                reject(new Error("Failed to read image"));
+            };
 
-    setTimeout(function () {
+            reader.readAsDataURL(file);
+        });
+    }
 
-        message.classList.remove("show");
-    
+    // Success message
+    function showSuccessMessage(complaintId) {
+
+        const message = document.createElement("div");
+
+        message.className = "report-success";
+
+        message.innerHTML = `
+            <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <div>
+                <strong>Complaint submitted successfully!</strong>
+                <p>Complaint ID: ${complaintId}</p>
+            </div>
+        `;
+
+        document.body.appendChild(message);
+
         setTimeout(function () {
-            message.remove();
-        }, 300);
-    
-    }, 2500);
+            message.classList.add("show");
+        }, 50);
 
-}
+        setTimeout(function () {
+            message.classList.remove("show");
 
+            setTimeout(function () {
+                message.remove();
+            }, 300);
 
-/* =========================
-   LOGOUT
-========================= */
+        }, 2500);
+    }
 
-function initializeLogout() {
-
-    const logoutButton =
-        document.getElementById("logoutButton");
-
-    if (!logoutButton) return;
-
-    logoutButton.addEventListener("click", function () {
-
-        const confirmed =
-            confirm(
-                "Are you sure you want to logout?"
-            );
-
-
-        if (!confirmed) return;
-
-
-        window.location.href =
-            "login.html";
-
-    });
-
-}
-
+});

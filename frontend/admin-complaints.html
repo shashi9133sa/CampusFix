@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CampusFix | Manage Complaints</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="admin-complaints.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="admin-sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+
+        <div>
+            <h2>CampusFix</h2>
+            <span>ADMIN PANEL</span>
+        </div>
+
+    </div>
+
+
+    <nav class="admin-nav">
+
+        <a
+            href="admin-dashboard.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+        </a>
+
+
+        <a
+            href="admin-complaints.html"
+            class="admin-nav-item active"
+        >
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>All Complaints</span>
+        </a>
+
+
+        <a
+            href="admin-users.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-users"></i>
+            <span>Students</span>
+        </a>
+
+
+        <a
+            href="admin-notifications.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+
+
+        <a
+            href="admin-profile.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Admin Profile</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="admin-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+                <strong>System Online</strong>
+                <small>CampusFix Server</small>
+            </div>
+
+        </div>
+
+
+        <button
+            class="logout-button"
+            id="logoutBtn"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="admin-main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="admin-topbar">
+
+        <div class="topbar-left">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+
+                <span class="page-label">
+                    MAINTENANCE MANAGEMENT
+                </span>
+
+                <h1>All Complaints</h1>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- CONTENT -->
+
+    <section class="admin-content">
+
+
+        <!-- PAGE INTRO -->
+
+        <div class="page-intro">
+
+            <div>
+
+                <span class="section-label">
+                    COMPLAINT CONTROL
+                </span>
+
+                <h2>
+                    Campus Issues
+                </h2>
+
+                <p>
+                    Review complaints submitted by students
+                    and update their maintenance status.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FILTER BAR -->
+
+        <div class="filter-bar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search complaints..."
+                >
+
+            </div>
+
+
+            <select id="statusFilter">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="Pending">
+                    Pending
+                </option>
+
+                <option value="In Progress">
+                    In Progress
+                </option>
+
+                <option value="Resolved">
+                    Resolved
+                </option>
+
+                <option value="Rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+
+            <select id="categoryFilter">
+
+                <option value="all">
+                    All Categories
+                </option>
+
+                <option value="Electrical">
+                    Electrical
+                </option>
+
+                <option value="Plumbing">
+                    Plumbing
+                </option>
+
+                <option value="WiFi">
+                    WiFi
+                </option>
+
+                <option value="Furniture">
+                    Furniture
+                </option>
+
+                <option value="Cleaning">
+                    Cleaning
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- COMPLAINT COUNT -->
+
+        <div class="results-header">
+
+            <span id="complaintCount">
+                Loading complaints...
+            </span>
+
+            <button
+                id="refreshBtn"
+                class="refresh-button"
+            >
+                <i class="fa-solid fa-rotate"></i>
+                Refresh
+            </button>
+
+        </div>
+
+
+
+        <!-- COMPLAINT TABLE -->
+
+        <div class="complaints-table-wrapper">
+
+            <table class="complaints-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Complaint</th>
+
+                        <th>Category</th>
+
+                        <th>Priority</th>
+
+                        <th>Location</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="complaintsTableBody">
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="loading-cell"
+                        >
+
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+
+                            Loading complaints...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- ================= STATUS MODAL ================= -->
+
+<div
+    class="modal-overlay"
+    id="statusModal"
+>
+
+    <div class="status-modal">
+
+        <button
+            class="modal-close"
+            id="modalClose"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+
+        <span class="section-label">
+            COMPLAINT STATUS
+        </span>
+
+
+        <h3>
+            Update Complaint
+        </h3>
+
+
+        <p id="modalComplaintTitle">
+            Select a new status for this complaint.
+        </p>
+
+
+        <input
+            type="hidden"
+            id="selectedComplaintId"
+        >
+
+
+        <div class="status-options">
+
+            <button
+                class="status-option pending-option"
+                data-status="Pending"
+            >
+                <i class="fa-regular fa-clock"></i>
+                <span>Pending</span>
+            </button>
+
+
+            <button
+                class="status-option progress-option"
+                data-status="In Progress"
+            >
+                <i class="fa-solid fa-spinner"></i>
+                <span>In Progress</span>
+            </button>
+
+
+            <button
+                class="status-option resolved-option"
+                data-status="Resolved"
+            >
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Resolved</span>
+            </button>
+
+
+            <button
+                class="status-option rejected-option"
+                data-status="Rejected"
+            >
+                <i class="fa-solid fa-circle-xmark"></i>
+                <span>Rejected</span>
+            </button>
+
+        </div>
+
+
+        <button
+            class="modal-cancel"
+            id="modalCancel"
+        >
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script src="admin-complaints.js"></script>
+
+</body>
+
+</html>

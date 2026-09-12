@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CampusFix | Admin Dashboard</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Admin Dashboard CSS -->
+    <link
+        rel="stylesheet"
+        href="admin-dashboard.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ===================== SIDEBAR ===================== -->
+
+<aside class="admin-sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+
+        <div>
+            <h2>CampusFix</h2>
+            <span>ADMIN PANEL</span>
+        </div>
+
+    </div>
+
+
+    <nav class="admin-nav">
+
+        <a
+            href="admin-dashboard.html"
+            class="admin-nav-item active"
+        >
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+        </a>
+
+
+        <a
+            href="admin-complaints.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>All Complaints</span>
+        </a>
+
+
+        <a
+            href="admin-users.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-users"></i>
+            <span>Students</span>
+        </a>
+
+
+        <a
+            href="admin-notifications.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+
+
+        <a
+            href="admin-profile.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Admin Profile</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="admin-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+                <strong>System Online</strong>
+                <small>CampusFix Server</small>
+            </div>
+
+        </div>
+
+
+        <button
+            class="logout-button"
+            id="logoutBtn"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ===================== MAIN AREA ===================== -->
+
+<main class="admin-main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="admin-topbar">
+
+        <div class="topbar-left">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+
+                <span class="page-label">
+                    ADMINISTRATION
+                </span>
+
+                <h1>Campus Overview</h1>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <button
+                class="topbar-icon"
+                title="Notifications"
+            >
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+            <div
+                class="admin-profile"
+                id="profileButton"
+            >
+
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <div class="admin-profile-info">
+
+                    <strong id="adminName">
+                        CampusFix Administrator
+                    </strong>
+
+                    <span>Administrator</span>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ===================== CONTENT ===================== -->
+
+    <section class="admin-content">
+
+
+        <!-- WELCOME -->
+
+        <div class="admin-welcome">
+
+            <div>
+
+                <span class="welcome-label">
+                    ADMIN CONTROL CENTER
+                </span>
+
+                <h2>
+                    Good evening, Administrator
+                </h2>
+
+                <p>
+                    Monitor campus issues, manage complaints,
+                    and keep maintenance operations moving.
+                </p>
+
+            </div>
+
+
+            <a
+                href="admin-complaints.html"
+                class="primary-admin-button"
+            >
+                <i class="fa-solid fa-list-check"></i>
+                Manage Complaints
+            </a>
+
+        </div>
+
+
+
+        <!-- ===================== STATISTICS ===================== -->
+
+        <div class="admin-stats">
+
+
+            <div class="admin-stat-card">
+
+                <div class="stat-card-top">
+
+                    <div class="stat-icon total">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+
+                    <span class="stat-period">
+                        All Time
+                    </span>
+
+                </div>
+
+                <span class="admin-stat-number" id="totalComplaints">
+                    0
+                </span>
+
+                <span class="admin-stat-label">
+                    Total Complaints
+                </span>
+
+            </div>
+
+
+
+            <div class="admin-stat-card">
+
+                <div class="stat-card-top">
+
+                    <div class="stat-icon pending">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+
+                    <span class="stat-period">
+                        Attention
+                    </span>
+
+                </div>
+
+                <span class="admin-stat-number" id="pendingComplaints">
+                    0
+                </span>
+
+                <span class="admin-stat-label">
+                    Pending
+                </span>
+
+            </div>
+
+
+
+            <div class="admin-stat-card">
+
+                <div class="stat-card-top">
+
+                    <div class="stat-icon progress">
+                        <i class="fa-solid fa-spinner"></i>
+                    </div>
+
+                    <span class="stat-period">
+                        Active
+                    </span>
+
+                </div>
+
+                <span class="admin-stat-number" id="progressComplaints">
+                    0
+                </span>
+
+                <span class="admin-stat-label">
+                    In Progress
+                </span>
+
+            </div>
+
+
+
+            <div class="admin-stat-card">
+
+                <div class="stat-card-top">
+
+                    <div class="stat-icon resolved">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <span class="stat-period">
+                        Completed
+                    </span>
+
+                </div>
+
+                <span class="admin-stat-number" id="resolvedComplaints">
+                    0
+                </span>
+
+                <span class="admin-stat-label">
+                    Resolved
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ===================== OPERATIONS ===================== -->
+
+        <div class="admin-grid">
+
+
+            <!-- RECENT COMPLAINTS -->
+
+            <div class="admin-panel complaints-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-kicker">
+                            MAINTENANCE
+                        </span>
+
+                        <h3>
+                            Recent Complaints
+                        </h3>
+
+                    </div>
+
+
+                    <a
+                        href="admin-complaints.html"
+                        class="panel-link"
+                    >
+                        View All
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="adminComplaintsList"
+                    class="admin-complaints-list"
+                >
+
+                    <div class="admin-empty-state">
+
+                        <div class="empty-icon">
+                            <i class="fa-solid fa-inbox"></i>
+                        </div>
+
+                        <strong>
+                            Loading complaints...
+                        </strong>
+
+                        <span>
+                            Fetching campus maintenance data.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="admin-panel quick-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-kicker">
+                            CONTROL
+                        </span>
+
+                        <h3>
+                            Quick Actions
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <a
+                        href="admin-complaints.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-action-icon">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+
+                        <div>
+                            <strong>
+                                Review Complaints
+                            </strong>
+
+                            <span>
+                                View and update all complaints
+                            </span>
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </a>
+
+
+
+                    <a
+                        href="admin-users.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-action-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div>
+                            <strong>
+                                Manage Students
+                            </strong>
+
+                            <span>
+                                View registered students
+                            </span>
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </a>
+
+
+
+                    <a
+                        href="admin-notifications.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-action-icon">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+
+                        <div>
+                            <strong>
+                                Notifications
+                            </strong>
+
+                            <span>
+                                Monitor system activity
+                            </span>
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </a>
+
+
+
+                    <a
+                        href="admin-profile.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-action-icon">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+
+                        <div>
+                            <strong>
+                                Admin Profile
+                            </strong>
+
+                            <span>
+                                Manage administrator account
+                            </span>
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ===================== SYSTEM SUMMARY ===================== -->
+
+        <div class="system-summary">
+
+            <div class="summary-item">
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-server"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Backend Status
+                    </span>
+
+                    <strong id="backendStatus">
+                        Checking...
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-divider"></div>
+
+
+            <div class="summary-item">
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Complaint Database
+                    </span>
+
+                    <strong>
+                        Connected
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-divider"></div>
+
+
+            <div class="summary-item">
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Access Level
+                    </span>
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script src="admin-guard.js"></script>
+<script src="admin-complaints.js"></script>
+<script src="admin-dashboard.js"></script>
+
+</body>
+
+</html>

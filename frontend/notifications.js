@@ -429,17 +429,303 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
 
-    // ==========================================
-    // INITIAL SETUP
-    // ==========================================
+// ==========================================
+// LOAD BACKEND NOTIFICATIONS
+// ==========================================
 
-    setupReadButtons();
+async function loadBackendNotifications() {
 
-    setupDeleteButtons();
+    try {
 
-    updateCounts();
+        const response = await fetch(
+            "http://localhost:5000/api/complaints/all"
+        );
 
-    applyFilters();
+        if (!response.ok) {
+            throw new Error("Failed to fetch complaints");
+        }
 
+        const complaints = await response.json();
+
+        console.log(
+            "Notifications loaded from backend:",
+            complaints
+        );
+
+        complaints.forEach(complaint => {
+
+            createNotification(complaint);
+
+        });
+
+        setupReadButtons();
+
+        setupDeleteButtons();
+
+        updateCounts();
+
+        applyFilters();
+
+    } catch (error) {
+
+        console.error(
+            "Could not load notifications:",
+            error
+        );
+
+        updateCounts();
+
+        applyFilters();
+
+    }
+
+}
+
+
+// ==========================================
+// CREATE NOTIFICATION
+// ==========================================
+
+function createNotification(complaint) {
+
+    const container =
+        document.getElementById("notificationsContainer");
+
+    if (!container) return;
+
+
+    const notification =
+        document.createElement("article");
+
+
+    notification.className =
+        "notification-card unread";
+
+    notification.dataset.status =
+        "unread";
+
+
+    // =========================
+    // STATUS DESIGN
+    // =========================
+
+    let iconClass =
+        "report-icon";
+
+    let icon =
+        "fa-solid fa-file-circle-plus";
+
+    let title =
+        "Complaint Submitted";
+
+    let message =
+        "was successfully submitted.";
+
+
+    if (
+        complaint.status &&
+        complaint.status.toLowerCase() === "in progress"
+    ) {
+
+        iconClass =
+            "progress-icon";
+
+        icon =
+            "fa-solid fa-screwdriver-wrench";
+
+        title =
+            "Complaint is now In Progress";
+
+        message =
+            "has been assigned to the maintenance team.";
+
+    }
+
+
+    if (
+        complaint.status &&
+        complaint.status.toLowerCase() === "resolved"
+    ) {
+
+        iconClass =
+            "resolved-icon";
+
+        icon =
+            "fa-solid fa-circle-check";
+
+        title =
+            "Complaint Resolved";
+
+        message =
+            "has been successfully resolved.";
+
+    }
+
+
+    // =========================
+    // TIME
+    // =========================
+
+    const timeText =
+        complaint.created_at
+            ? getNotificationTime(complaint.created_at)
+            : "Just now";
+
+
+    // =========================
+    // CARD
+    // =========================
+
+    notification.innerHTML = `
+
+        <div class="notification-icon ${iconClass}">
+
+            <i class="${icon}"></i>
+
+        </div>
+
+
+        <div class="notification-content">
+
+            <div class="notification-title-row">
+
+                <h3>
+                    ${title}
+                </h3>
+
+                <span class="unread-dot"></span>
+
+            </div>
+
+
+            <p>
+
+                Your complaint
+
+                <strong>
+                    "${escapeHTML(complaint.title)}"
+                </strong>
+
+                ${message}
+
+            </p>
+
+
+            <span class="notification-time">
+
+                <i class="fa-regular fa-clock"></i>
+
+                ${timeText}
+
+            </span>
+
+        </div>
+
+
+        <div class="notification-actions">
+
+            <button
+                class="read-button"
+                title="Mark as read"
+            >
+
+                <i class="fa-solid fa-check"></i>
+
+            </button>
+
+
+            <button
+                class="delete-button"
+                title="Delete"
+            >
+
+                <i class="fa-solid fa-trash"></i>
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    container.appendChild(notification);
+
+}
+function getNotificationTime(createdAt) {
+
+    const created =
+        new Date(createdAt);
+
+    const now =
+        new Date();
+
+    const difference =
+        Math.floor(
+            (now - created) / 1000
+        );
+
+
+    if (difference < 60) {
+        return "Just now";
+    }
+
+
+    const minutes =
+        Math.floor(
+            difference / 60
+        );
+
+
+    if (minutes < 60) {
+        return `${minutes} min ago`;
+    }
+
+
+    const hours =
+        Math.floor(
+            minutes / 60
+        );
+
+
+    if (hours < 24) {
+        return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+    }
+
+
+    const days =
+        Math.floor(
+            hours / 24
+        );
+
+
+    if (days === 1) {
+        return "Yesterday";
+    }
+
+
+    return `${days} days ago`;
+
+}
+// ==========================================
+// HTML SECURITY
+// ==========================================
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+// ==========================================
+// INITIAL SETUP
+// ==========================================
+
+loadBackendNotifications();
 });
 

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CampusFix | Admin Notifications</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="admin-notifications.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="admin-sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-wrench"></i>
+        </div>
+
+        <div>
+            <h2>CampusFix</h2>
+            <span>ADMIN PANEL</span>
+        </div>
+
+    </div>
+
+
+    <nav class="admin-nav">
+
+        <a
+            href="admin-dashboard.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+        </a>
+
+
+        <a
+            href="admin-complaints.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>All Complaints</span>
+        </a>
+
+
+        <a
+            href="admin-users.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-users"></i>
+            <span>Students</span>
+        </a>
+
+
+        <a
+            href="admin-notifications.html"
+            class="admin-nav-item active"
+        >
+            <i class="fa-solid fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+
+
+        <a
+            href="admin-profile.html"
+            class="admin-nav-item"
+        >
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Admin Profile</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="admin-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+                <strong>System Online</strong>
+                <small>CampusFix Server</small>
+            </div>
+
+        </div>
+
+
+        <button
+            class="logout-button"
+            id="logoutBtn"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="admin-main">
+
+
+    <header class="admin-topbar">
+
+        <div class="topbar-left">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+
+                <span class="page-label">
+                    SYSTEM ACTIVITY
+                </span>
+
+                <h1>Notifications</h1>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <section class="admin-content">
+
+
+        <div class="page-intro">
+
+            <span class="section-label">
+                ADMIN ALERT CENTER
+            </span>
+
+            <h2>
+                System Notifications
+            </h2>
+
+            <p>
+                Monitor recent complaint activity and
+                maintenance status changes.
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= SUMMARY ================= -->
+
+        <div class="notification-summary">
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+
+                <div>
+
+                    <span>Total Activity</span>
+
+                    <strong id="totalNotifications">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                <div>
+
+                    <span>Pending Issues</span>
+
+                    <strong id="pendingNotifications">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon success">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div>
+
+                    <span>Resolved Issues</span>
+
+                    <strong id="resolvedNotifications">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= NOTIFICATION HEADER ================= -->
+
+        <div class="notification-header">
+
+            <div>
+
+                <span class="section-label">
+                    RECENT ACTIVITY
+                </span>
+
+                <h3>
+                    CampusFix Updates
+                </h3>
+
+            </div>
+
+
+            <button
+                class="refresh-button"
+                id="refreshNotifications"
+            >
+                <i class="fa-solid fa-rotate"></i>
+                Refresh
+            </button>
+
+        </div>
+
+
+
+        <!-- ================= NOTIFICATIONS ================= -->
+
+        <div
+            class="notification-list"
+            id="adminNotificationList"
+        >
+
+            <div class="notification-loading">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <span>
+                    Loading system activity...
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<script src="admin-guard.js"></script>
+<script src="admin-notifications.js"></script>
+
+</body>
+
+</html>
