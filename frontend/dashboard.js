@@ -257,21 +257,76 @@ function updateRecentComplaints(complaints) {
     if (!list) return;
 
 
-    /* If no saved complaints,
-       keep the original demo data */
+    const savedUser =
+        localStorage.getItem("campusFixUser");
 
-    if (complaints.length === 0) return;
+    if (!savedUser) {
+        list.innerHTML = "";
+        return;
+    }
 
 
-    /* Clear static complaints */
+    let loggedInUser;
+
+    try {
+        loggedInUser =
+            JSON.parse(savedUser);
+    } catch (error) {
+        list.innerHTML = "";
+        return;
+    }
+
+
+    /* Show only the logged-in student's complaints */
+
+    const userComplaints =
+        complaints.filter(function (complaint) {
+
+            return Number(complaint.user_id) ===
+                Number(loggedInUser.id);
+
+        });
+
+
+    /* Clear dummy complaints */
 
     list.innerHTML = "";
+
+
+    /* No complaints */
+
+    if (userComplaints.length === 0) {
+
+        list.innerHTML = `
+            <div class="complaint-row">
+                <div class="complaint-category light-icon">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+
+                <div class="complaint-details">
+                    <strong>
+                        No complaints yet
+                    </strong>
+
+                    <span>
+                        Your reported issues will appear here.
+                    </span>
+
+                    <small>
+                        Ready to report an issue
+                    </small>
+                </div>
+            </div>
+        `;
+
+        return;
+    }
 
 
     /* Show latest 4 */
 
     const recent =
-        complaints.slice(0, 4);
+        userComplaints.slice(0, 4);
 
 
     recent.forEach(function (complaint) {
@@ -297,7 +352,7 @@ function updateRecentComplaints(complaints) {
 
         const timeText =
             getTimeText(
-                complaint.createdAt
+                complaint.created_at
             );
 
 
@@ -316,9 +371,11 @@ function updateRecentComplaints(complaints) {
                     ${escapeHTML(complaint.title)}
                 </strong>
 
+
                 <span>
                     ${escapeHTML(complaint.location)}
                 </span>
+
 
                 <small>
                     ${timeText}
