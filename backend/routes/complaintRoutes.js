@@ -75,11 +75,27 @@ router.post("/", (req, res) => {
 
 // Get all complaints
 router.get("/all", (req, res) => {
-    const sql = "SELECT * FROM complaints ORDER BY created_at DESC";
+
+    const sql = `
+        SELECT
+            complaints.*,
+            users.name AS student_name,
+            users.student_id AS student_id,
+            users.department AS student_department,
+            users.email AS student_email
+        FROM complaints
+        LEFT JOIN users
+            ON complaints.user_id = users.id
+        ORDER BY complaints.created_at DESC
+    `;
 
     db.query(sql, (err, results) => {
+
         if (err) {
-            console.error("Error fetching complaints:", err.message);
+            console.error(
+                "Error fetching complaints:",
+                err.message
+            );
 
             return res.status(500).json({
                 message: "Failed to fetch complaints"
@@ -87,9 +103,10 @@ router.get("/all", (req, res) => {
         }
 
         res.json(results);
-    });
-});
 
+    });
+
+});
 // Get one complaint by ID
 router.get("/:id", (req, res) => {
     const complaintId = req.params.id;
