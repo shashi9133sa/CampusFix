@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Complaint Details | CampusFix</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="complaint-details.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <main class="details-page">
+
+        <div class="details-container">
+
+            <a href="complaints.html" class="back-button">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to My Complaints
+            </a>
+
+            <div class="details-card">
+
+                <div class="details-header">
+
+                    <div>
+                        <span class="details-label">
+                            COMPLAINT DETAILS
+                        </span>
+
+                        <h1 id="complaintTitle">
+                            Loading...
+                        </h1>
+                    </div>
+
+                    <span id="complaintStatus" class="status-badge">
+                        Loading
+                    </span>
+
+                </div>
+
+                <div class="details-grid">
+
+                    <div class="detail-item">
+                        <span>Complaint ID</span>
+                        <strong id="complaintId">—</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Category</span>
+                        <strong id="complaintCategory">—</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Priority</span>
+                        <strong id="complaintPriority">—</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Location</span>
+                        <strong id="complaintLocation">—</strong>
+                    </div>
+
+                </div>
+
+                <div class="description-section">
+
+                    <span>Description</span>
+
+                    <p id="complaintDescription">
+                        Loading complaint details...
+                    </p>
+
+                </div>
+
+                <div class="image-section" id="imageSection">
+
+                    <span>Attached Image</span>
+
+                    <img
+                        id="complaintImage"
+                        src=""
+                        alt="Complaint image"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="user-session.js"></script>
+    <script src="complaint-details.js"></script>
+
+</body>
+
+</html>

@@ -433,8 +433,9 @@ a {
 
 
 .notification-dot {
-    position: absolute;
+    display: none;
 
+    position: absolute;
     top: 7px;
     right: 7px;
 

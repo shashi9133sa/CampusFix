@@ -110,7 +110,7 @@
    
            tableBody.innerHTML = `
                <tr>
-                   <td colspan="6" class="loading-cell">
+                   <td colspan="7" class="loading-cell">
                        <i class="fa-solid fa-spinner fa-spin"></i>
                        Loading complaints...
                    </td>
@@ -148,7 +148,7 @@
    
                tableBody.innerHTML = `
                    <tr>
-                       <td colspan="6" class="loading-cell">
+                       <td colspan="7" class="loading-cell">
                            <i class="fa-solid fa-triangle-exclamation"></i>
                            Unable to load complaints.
                        </td>
@@ -193,7 +193,7 @@
            tableBody.innerHTML = `
                <tr>
                    <td
-                       colspan="6"
+                       colspan="7"
                        class="loading-cell"
                    >
                        <i class="fa-solid fa-inbox"></i>
@@ -267,26 +267,38 @@
    
    
                <td>
-   
-                   ${escapeHTML(
-                       complaint.location ||
-                       "Unknown"
-                   )}
-   
-               </td>
-   
-   
-               <td>
-   
-                   <span class="badge ${getStatusBadgeClass(
-                       status
-                   )}">
-   
-                       ${escapeHTML(status)}
-   
-                   </span>
-   
-               </td>
+
+    ${escapeHTML(
+        complaint.location ||
+        "Unknown"
+    )}
+
+</td>
+
+
+<td>
+
+    <div class="complaint-student">
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>
+            ${escapeHTML(
+                complaint.student_name ||
+                "Unknown Student"
+            )}
+        </span>
+
+    </div>
+
+</td>
+
+
+<td>
+
+    <span class="badge ${getStatusBadgeClass(
+        status
+    )}">
    
    
                <td>

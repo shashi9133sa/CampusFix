@@ -454,20 +454,28 @@ function updateRecentComplaints(
 
                 <div class="complaint-info">
 
-                    <strong>
-                        ${escapeHTML(
-                            complaint.title
-                        )}
-                    </strong>
+                <strong>
+                    ${escapeHTML(
+                        complaint.title
+                    )}
+                </strong>
+            
+                <small>
+    ${escapeHTML(
+        complaint.location
+    )}
+</small>
 
-                    <span>
-                        ${escapeHTML(
-                            complaint.location
-                        )}
-                    </span>
-
-                </div>
-
+<small>
+    <i class="fa-solid fa-user"></i>
+    Submitted by:
+    ${escapeHTML(
+        complaint.student_name ||
+        "Unknown Student"
+    )}
+</small>
+            
+            </div>
 
                 <span
                     class="complaint-status ${statusClass}"

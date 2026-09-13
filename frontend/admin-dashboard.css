@@ -516,22 +516,21 @@ button {
 
 
 .notification-dot {
+    display: none;
 
     position: absolute;
-
-    top: 8px;
-    right: 8px;
+    top: 7px;
+    right: 7px;
 
     width: 5px;
     height: 5px;
 
     border-radius: 50%;
 
-    background: var(--purple);
+    background: #8174ff;
 
     box-shadow:
-        0 0 7px rgba(124, 92, 255, 0.8);
-
+        0 0 7px rgba(129, 116, 255, 0.8);
 }
 
 
@@ -1480,7 +1479,8 @@ button {
 }
 
 
-.complaint-info small {
+.complaint-info small,
+.complaint-info span {
     display: block;
 
     margin-top: 5px;

@@ -1,65 +1,200 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-    // =========================
-    // MOBILE MENU
-    // =========================
+    initializeMobileMenu();
+    initializeSidebarLinks();
+    initializeNotificationButton();
+    initializeProfileButton();
+    initializeLogout();
 
-    const menuButton = document.getElementById("menuButton");
-    const sidebar = document.getElementById("sidebar");
-
-    if (menuButton && sidebar) {
-        menuButton.addEventListener("click", () => {
-            sidebar.classList.toggle("open");
-        });
-    }
-
-
-    // =========================
-    // LOAD SAVED COMPLAINTS
-    // =========================
-
+    initializeFilters();
     loadComplaints();
-
-
-    // =========================
-    // FILTERS
-    // =========================
-
-    const searchInput = document.getElementById("searchInput");
-    const statusFilter = document.getElementById("statusFilter");
-    const categoryFilter = document.getElementById("categoryFilter");
-
-    if (searchInput) {
-        searchInput.addEventListener("input", applyFilters);
-    }
-
-    if (statusFilter) {
-        statusFilter.addEventListener("change", applyFilters);
-    }
-
-    if (categoryFilter) {
-        categoryFilter.addEventListener("change", applyFilters);
-    }
-
-
-    // =========================
-    // LOGOUT
-    // =========================
-
-    const logoutButton = document.getElementById("logoutButton");
-
-    if (logoutButton) {
-        logoutButton.addEventListener("click", () => {
-            window.location.href = "login.html";
-        });
-    }
 
 });
 
 
-// =====================================================
-// LOAD COMPLAINTS
-// =====================================================
+/* =========================
+   MOBILE MENU
+========================= */
+
+function initializeMobileMenu() {
+
+    const menuButton =
+        document.getElementById("mobileMenu");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    if (!menuButton || !sidebar) return;
+
+    menuButton.addEventListener("click", function () {
+
+        sidebar.classList.toggle("open");
+
+        const icon =
+            menuButton.querySelector("i");
+
+        if (!icon) return;
+
+        if (sidebar.classList.contains("open")) {
+
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+
+        } else {
+
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+function initializeSidebarLinks() {
+
+    const links =
+        document.querySelectorAll(".sidebar-link");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    links.forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            if (sidebar) {
+                sidebar.classList.remove("open");
+            }
+
+        });
+
+    });
+
+}
+
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+function initializeNotificationButton() {
+
+    const notificationButton =
+        document.querySelector(".topbar-icon");
+
+    if (!notificationButton) return;
+
+    notificationButton.setAttribute(
+        "href",
+        "notifications.html"
+    );
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function initializeProfileButton() {
+
+    const profileButton =
+        document.querySelector(".profile-button");
+
+    if (!profileButton) return;
+
+    profileButton.addEventListener("click", function () {
+
+        window.location.href =
+            "profile.html";
+
+    });
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function initializeLogout() {
+
+    const logoutButton =
+        document.getElementById("logoutBtn");
+
+    if (!logoutButton) return;
+
+    logoutButton.addEventListener("click", function () {
+
+        const confirmed =
+            confirm("Are you sure you want to logout?");
+
+        if (!confirmed) return;
+
+        localStorage.removeItem("campusFixUser");
+
+        window.location.href =
+            "login.html";
+
+    });
+
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+function initializeFilters() {
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const statusFilter =
+        document.getElementById("statusFilter");
+
+    const categoryFilter =
+        document.getElementById("categoryFilter");
+
+    if (searchInput) {
+
+        searchInput.addEventListener(
+            "input",
+            applyFilters
+        );
+
+    }
+
+    if (statusFilter) {
+
+        statusFilter.addEventListener(
+            "change",
+            applyFilters
+        );
+
+    }
+
+    if (categoryFilter) {
+
+        categoryFilter.addEventListener(
+            "change",
+            applyFilters
+        );
+
+    }
+
+}
+
+
+/* =========================
+   LOAD COMPLAINTS
+========================= */
 
 async function loadComplaints() {
 
@@ -68,436 +203,548 @@ async function loadComplaints() {
 
     if (!container) return;
 
-    // Get logged-in student
-    let loggedInUser = null;
 
-    try {
-        const savedUser =
-            localStorage.getItem("campusFixUser");
+    const savedUser =
+        localStorage.getItem("campusFixUser");
 
-        if (savedUser) {
-            loggedInUser = JSON.parse(savedUser);
-            console.log("Logged-in user:", loggedInUser);
-console.log("Student ID:", loggedInUser.id);
-        }
-    } catch (error) {
-        console.error("User data error:", error);
-    }
 
-    if (!loggedInUser || !loggedInUser.id) {
-        window.location.href = "login.html";
+    if (!savedUser) {
+
+        window.location.href =
+            "login.html";
+
         return;
+
     }
 
-    let savedComplaints = [];
+
+    let loggedInUser;
 
     try {
 
-        const response = await fetch(
-            "https://campusfix-obdm.onrender.com/api/complaints/all"
+        loggedInUser =
+            JSON.parse(savedUser);
+
+    } catch (error) {
+
+        console.error(
+            "Invalid logged-in user:",
+            error
         );
+
+        localStorage.removeItem(
+            "campusFixUser"
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    /* Loading state */
+
+    container.innerHTML = `
+        <div class="complaints-loading">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <span>Loading your complaints...</span>
+        </div>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                "https://campusfix-obdm.onrender.com/api/complaints/all"
+            );
+
 
         if (!response.ok) {
-            throw new Error("Failed to fetch complaints");
+
+            throw new Error(
+                "Failed to fetch complaints"
+            );
+
         }
 
-        savedComplaints = await response.json();
 
-        // Show only this student's complaints
-        savedComplaints = savedComplaints.filter(
-            complaint =>
-                Number(complaint.user_id) === Number(loggedInUser.id)
-        );
+        const complaints =
+            await response.json();
 
-        console.log(
-            "Student complaints loaded:",
-            savedComplaints
+
+        /* =========================
+           ONLY LOGGED-IN USER
+        ========================= */
+
+        const userComplaints =
+            complaints.filter(function (complaint) {
+
+                return Number(complaint.user_id) ===
+                    Number(loggedInUser.id);
+
+            });
+
+
+        /* Save for filtering */
+
+        window.allUserComplaints =
+            userComplaints;
+
+
+        renderComplaints(
+            userComplaints
         );
 
     } catch (error) {
 
         console.error(
-            "Could not load complaints:",
+            "Error loading complaints:",
             error
         );
 
+
         container.innerHTML = `
-            <div style="text-align:center; padding:40px;">
-                <h3>Unable to load complaints</h3>
-                <p>Please make sure the CampusFix backend is running.</p>
+            <div class="complaints-empty">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <strong>
+                    Unable to load complaints
+                </strong>
+
+                <span>
+                    Please try again later.
+                </span>
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   RENDER COMPLAINTS
+========================= */
+
+function renderComplaints(complaints) {
+
+    const container =
+        document.getElementById(
+            "complaintsContainer"
+        );
+
+    if (!container) return;
+
+
+    container.innerHTML = "";
+
+
+    if (complaints.length === 0) {
+
+        container.innerHTML = `
+            <div class="complaints-empty">
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+
+                <strong>
+                    No complaints found
+                </strong>
+
+                <span>
+                    You haven't reported any complaints yet.
+                </span>
+
+                <a href="report.html" class="empty-button">
+                    <i class="fa-solid fa-plus"></i>
+                    Report an Issue
+                </a>
+
             </div>
         `;
 
         return;
+
     }
 
-    // Remove old dummy/static complaints
-container
-.querySelectorAll(".complaint-card")
-.forEach(card => card.remove());
 
-    // Create complaint cards
-    savedComplaints
-        .slice()
-        .reverse()
-        .forEach(complaint => {
+    complaints.forEach(function (complaint) {
 
-            const card =
-                createComplaintCard(complaint);
+        const card =
+            document.createElement("article");
 
-            container.appendChild(card);
+        card.className =
+            "complaint-card";
+
+
+        const icon =
+            getCategoryIcon(
+                complaint.category
+            );
+
+
+        const statusClass =
+            getStatusClass(
+                complaint.status
+            );
+
+
+        const date =
+            formatDate(
+                complaint.created_at
+            );
+
+
+        card.innerHTML = `
+
+            <div class="complaint-icon ${icon.className}">
+                <i class="${icon.icon}"></i>
+            </div>
+
+
+            <div class="complaint-details">
+
+                <div class="complaint-title-row">
+
+                    <h3>
+                        ${escapeHTML(
+                            complaint.title
+                        )}
+                    </h3>
+
+                    <span class="status ${statusClass}">
+                        ${escapeHTML(
+                            complaint.status
+                        )}
+                    </span>
+
+                </div>
+
+
+                <p class="complaint-description">
+                    ${escapeHTML(
+                        complaint.description
+                    )}
+                </p>
+
+
+                <div class="complaint-meta">
+
+                    <span>
+                        <i class="fa-solid fa-location-dot"></i>
+                        ${escapeHTML(
+                            complaint.location
+                        )}
+                    </span>
+
+                    <span>
+                        <i class="fa-regular fa-calendar"></i>
+                        ${date}
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-tag"></i>
+                        ${escapeHTML(
+                            complaint.category
+                        )}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="view-button"
+                type="button"
+            >
+                View Details
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        `;
+
+
+        const viewButton =
+            card.querySelector(
+                ".view-button"
+            );
+
+
+            if (viewButton) {
+
+                viewButton.addEventListener(
+                    "click",
+                    function (event) {
+            
+                        event.preventDefault();
+                        event.stopPropagation();
+            
+                        showComplaintDetails(complaint);
+            
+                    }
+                );
+            
+            }
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   APPLY FILTERS
+========================= */
+
+function applyFilters() {
+
+    const complaints =
+        window.allUserComplaints || [];
+
+
+    const searchInput =
+        document.getElementById(
+            "searchInput"
+        );
+
+
+    const statusFilter =
+        document.getElementById(
+            "statusFilter"
+        );
+
+
+    const categoryFilter =
+        document.getElementById(
+            "categoryFilter"
+        );
+
+
+    const search =
+        searchInput
+            ? searchInput.value
+                .trim()
+                .toLowerCase()
+            : "";
+
+
+    const status =
+        statusFilter
+            ? statusFilter.value
+                .toLowerCase()
+            : "all";
+
+
+    const category =
+        categoryFilter
+            ? categoryFilter.value
+                .toLowerCase()
+            : "all";
+
+
+    const filtered =
+        complaints.filter(function (complaint) {
+
+            const title =
+                (complaint.title || "")
+                    .toLowerCase();
+
+            const description =
+                (complaint.description || "")
+                    .toLowerCase();
+
+            const complaintStatus =
+                (complaint.status || "")
+                    .toLowerCase();
+
+            const complaintCategory =
+                (complaint.category || "")
+                    .toLowerCase();
+
+
+            const matchesSearch =
+                !search ||
+                title.includes(search) ||
+                description.includes(search);
+
+
+            const matchesStatus =
+                status === "all" ||
+                complaintStatus === status;
+
+
+            const matchesCategory =
+                category === "all" ||
+                complaintCategory === category;
+
+
+            return (
+                matchesSearch &&
+                matchesStatus &&
+                matchesCategory
+            );
 
         });
 
-    // Connect View Details buttons
-    initializeViewButtons();
 
-    // Apply filters
-    applyFilters();
-}
+    renderComplaints(filtered);
 
-// =====================================================
-// CREATE COMPLAINT CARD
-// =====================================================
-
-function createComplaintCard(complaint) {
-
-    const article =
-        document.createElement("article");
-
-
-    article.className =
-        "complaint-card dynamic-complaint";
-
-
-    // Status
-
-    const status =
-        complaint.status || "Pending";
-
-    const statusClass =
-        getStatusClass(status);
-
-
-    // Category
-
-    const category =
-        complaint.category || "Other";
-
-    const categoryClass =
-        getCategoryClass(category);
-
-    const categoryIcon =
-        getCategoryIcon(category);
-
-
-    // Date
-
-    const date =
-        complaint.date || getCurrentDate();
-
-
-    article.dataset.status =
-        statusClass;
-
-    article.dataset.category =
-        category;
-
-
-    // Same structure as your original HTML
-
-    article.innerHTML = `
-
-        <div class="complaint-icon ${categoryClass}">
-
-            <i class="${categoryIcon}"></i>
-
-        </div>
-
-
-        <div class="complaint-details">
-
-            <div class="complaint-title-row">
-
-                <h3>
-                    ${escapeHTML(complaint.title || "Untitled Complaint")}
-                </h3>
-
-                <span class="status ${statusClass}">
-                    ${escapeHTML(status)}
-                </span>
-
-            </div>
-
-
-            <p class="complaint-description">
-
-                ${escapeHTML(
-                    complaint.description ||
-                    "No description provided."
-                )}
-
-            </p>
-
-
-            <div class="complaint-meta">
-
-                <span>
-
-                    <i class="fa-solid fa-location-dot"></i>
-
-                    ${escapeHTML(
-                        complaint.location ||
-                        "Location not specified"
-                    )}
-
-                </span>
-
-
-                <span>
-
-                    <i class="fa-regular fa-calendar"></i>
-
-                    ${escapeHTML(date)}
-
-                </span>
-
-
-                <span>
-
-                    <i class="fa-solid fa-tag"></i>
-
-                    ${escapeHTML(category)}
-
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <button class="view-button" type="button">
-
-            View Details
-
-            <i class="fa-solid fa-arrow-right"></i>
-
-        </button>
-
-    `;
-
-
-    // Store complete complaint data directly on card
-
-    article.complaintData = complaint;
-
-
-    return article;
 }
 
 
-// =====================================================
-// CATEGORY ICON
-// =====================================================
+/* =========================
+   CATEGORY ICON
+========================= */
 
 function getCategoryIcon(category) {
 
     const value =
-        category.toLowerCase();
+        (category || "").toLowerCase();
 
 
     if (value.includes("electrical")) {
-        return "fa-solid fa-bolt";
+
+        return {
+            className: "electrical",
+            icon: "fa-solid fa-bolt"
+        };
+
     }
 
+
     if (value.includes("plumbing")) {
-        return "fa-solid fa-droplet";
+
+        return {
+            className: "plumbing",
+            icon: "fa-solid fa-droplet"
+        };
+
     }
+
 
     if (value.includes("internet") ||
         value.includes("wifi")) {
-        return "fa-solid fa-wifi";
+
+        return {
+            className: "internet",
+            icon: "fa-solid fa-wifi"
+        };
+
     }
+
 
     if (value.includes("furniture")) {
-        return "fa-solid fa-chair";
+
+        return {
+            className: "furniture",
+            icon: "fa-solid fa-chair"
+        };
+
     }
 
-    if (value.includes("cleanliness")) {
-        return "fa-solid fa-broom";
+
+    if (value.includes("clean")) {
+
+        return {
+            className: "cleaning",
+            icon: "fa-solid fa-broom"
+        };
+
     }
 
-    return "fa-solid fa-circle-exclamation";
+
+    return {
+        className: "electrical",
+        icon: "fa-solid fa-circle-exclamation"
+    };
+
 }
 
 
-// =====================================================
-// CATEGORY CSS CLASS
-// =====================================================
-
-function getCategoryClass(category) {
-
-    const value =
-        category.toLowerCase();
-
-
-    if (value.includes("electrical")) {
-        return "electrical";
-    }
-
-    if (value.includes("plumbing")) {
-        return "plumbing";
-    }
-
-    if (value.includes("internet") ||
-        value.includes("wifi")) {
-        return "internet";
-    }
-
-    if (value.includes("furniture")) {
-        return "furniture";
-    }
-
-    return "electrical";
-}
-
-
-// =====================================================
-// STATUS CSS CLASS
-// =====================================================
+/* =========================
+   STATUS CLASS
+========================= */
 
 function getStatusClass(status) {
 
     const value =
-        status.toLowerCase();
+        (status || "").toLowerCase();
+
+
+    if (value.includes("resolved")) {
+        return "resolved";
+    }
 
 
     if (value.includes("progress")) {
         return "progress";
     }
 
-    if (value.includes("resolved")) {
-        return "resolved";
-    }
 
     return "pending";
+
 }
 
 
-// =====================================================
-// VIEW DETAILS
-// =====================================================
+/* =========================
+   FORMAT DATE
+========================= */
 
-function initializeViewButtons() {
+function formatDate(dateValue) {
 
-    const buttons =
-        document.querySelectorAll(".view-button");
+    if (!dateValue) {
+        return "Recently reported";
+    }
 
 
-    buttons.forEach(button => {
+    const date =
+        new Date(dateValue);
 
-        // Prevent duplicate listeners
 
-        if (button.dataset.connected === "true") {
-            return;
+    if (isNaN(date.getTime())) {
+        return "Recently reported";
+    }
+
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
         }
+    );
 
-        button.dataset.connected = "true";
-
-
-        button.addEventListener("click", function (event) {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-
-            const card =
-                this.closest(".complaint-card");
-
-
-            if (!card) {
-                console.error("Complaint card not found.");
-                return;
-            }
-
-
-            // For new complaints
-
-            if (card.complaintData) {
-
-                showComplaintDetails(
-                    card.complaintData
-                );
-
-                return;
-            }
-
-
-            // For original static complaints
-
-            const title =
-                card.querySelector("h3")?.textContent.trim()
-                || "Complaint";
-
-
-            const description =
-                card.querySelector(
-                    ".complaint-description"
-                )?.textContent.trim()
-                || "No description available.";
-
-
-            const status =
-                card.querySelector(".status")
-                ?.textContent.trim()
-                || "Pending";
-
-
-            const meta =
-                card.querySelectorAll(
-                    ".complaint-meta span"
-                );
-
-
-            const location =
-                meta[0]?.textContent.trim()
-                || "Not specified";
-
-
-            const date =
-                meta[1]?.textContent.trim()
-                || "Not specified";
-
-
-            const category =
-                meta[2]?.textContent.trim()
-                || "Not specified";
-
-
-            showComplaintDetails({
-
-                title,
-                description,
-                status,
-                location,
-                date,
-                category
-
-            });
-
-        });
-
-    });
 }
 
 
-// =====================================================
-// DETAILS MODAL
-// =====================================================
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text ?? "";
+
+    return div.innerHTML;
+
+}
+/* =========================
+   COMPLAINT DETAILS POPUP
+========================= */
 
 function showComplaintDetails(complaint) {
-
-    // Remove existing modal
 
     const existingModal =
         document.querySelector(
@@ -508,26 +755,26 @@ function showComplaintDetails(complaint) {
         existingModal.remove();
     }
 
-
     const overlay =
         document.createElement("div");
-
 
     overlay.className =
         "complaint-details-overlay";
 
-
-    const categoryIcon =
+    const icon =
         getCategoryIcon(
             complaint.category || ""
         );
-
 
     const statusClass =
         getStatusClass(
             complaint.status || "Pending"
         );
 
+    const date =
+        formatDate(
+            complaint.created_at
+        );
 
     overlay.innerHTML = `
 
@@ -538,348 +785,161 @@ function showComplaintDetails(complaint) {
                 type="button"
                 aria-label="Close"
             >
-
                 <i class="fa-solid fa-xmark"></i>
-
             </button>
 
-
             <div class="details-icon">
-
-                <i class="${categoryIcon}"></i>
-
+                <i class="${icon.icon}"></i>
             </div>
 
-
             <h2>
-
                 ${escapeHTML(
                     complaint.title ||
                     "Complaint Details"
                 )}
-
             </h2>
 
-
             <span class="details-status ${statusClass}">
-
                 ${escapeHTML(
                     complaint.status ||
                     "Pending"
                 )}
-
             </span>
-
 
             <div class="details-section">
 
                 <h4>Description</h4>
 
                 <p>
-
                     ${escapeHTML(
                         complaint.description ||
                         "No description provided."
                     )}
-
                 </p>
 
             </div>
-
 
             <div class="details-section">
 
                 <h4>Location</h4>
 
                 <p>
-
                     ${escapeHTML(
                         complaint.location ||
                         "Not specified"
                     )}
-
                 </p>
 
             </div>
-
 
             <div class="details-section">
 
                 <h4>Category</h4>
 
                 <p>
-
                     ${escapeHTML(
                         complaint.category ||
                         "Not specified"
                     )}
-
                 </p>
 
             </div>
 
+            <div class="details-section">
+
+                <h4>Priority</h4>
+
+                <p>
+                    ${escapeHTML(
+                        complaint.priority ||
+                        "Not specified"
+                    )}
+                </p>
+
+            </div>
 
             <div class="details-section">
 
                 <h4>Date</h4>
 
                 <p>
-
-                    ${escapeHTML(
-                        complaint.date ||
-                        "Not specified"
-                    )}
-
+                    ${date}
                 </p>
 
             </div>
-
-
-            ${
-                complaint.priority
-                ? `
-                    <div class="details-section">
-
-                        <h4>Priority</h4>
-
-                        <p>
-                            ${escapeHTML(
-                                complaint.priority
-                            )}
-                        </p>
-
-                    </div>
-                `
-                : ""
-            }
-
 
             <button
                 class="details-close-button"
                 type="button"
             >
-
                 Close
-
             </button>
 
         </div>
 
     `;
 
-
     document.body.appendChild(overlay);
 
 
-    // Close X
+    /* Close X */
 
-    const closeButton =
-        overlay.querySelector(".details-close");
-
-
-    closeButton.addEventListener(
-        "click",
-        closeDetailsModal
-    );
-
-
-    // Close button
-
-    const bottomClose =
-        overlay.querySelector(
-            ".details-close-button"
+    overlay
+        .querySelector(".details-close")
+        .addEventListener(
+            "click",
+            function () {
+                overlay.remove();
+            }
         );
 
 
-    bottomClose.addEventListener(
-        "click",
-        closeDetailsModal
-    );
+    /* Close button */
+
+    overlay
+        .querySelector(".details-close-button")
+        .addEventListener(
+            "click",
+            function () {
+                overlay.remove();
+            }
+        );
 
 
-    // Click outside modal
+    /* Click outside */
 
     overlay.addEventListener(
         "click",
-        event => {
+        function (event) {
 
             if (event.target === overlay) {
-                closeDetailsModal();
+                overlay.remove();
             }
 
         }
     );
 
 
-    // Escape key
+    /* Escape */
+
+    function closeWithEscape(event) {
+
+        if (event.key === "Escape") {
+
+            overlay.remove();
+
+            document.removeEventListener(
+                "keydown",
+                closeWithEscape
+            );
+
+        }
+
+    }
 
     document.addEventListener(
         "keydown",
-        handleEscape
+        closeWithEscape
     );
 
-
-    function closeDetailsModal() {
-
-        overlay.remove();
-
-        document.removeEventListener(
-            "keydown",
-            handleEscape
-        );
-
-    }
-
-
-    function handleEscape(event) {
-
-        if (event.key === "Escape") {
-            closeDetailsModal();
-        }
-
-    }
-}
-
-
-// =====================================================
-// FILTERS
-// =====================================================
-
-function applyFilters() {
-
-    const searchInput =
-        document.getElementById("searchInput");
-
-
-    const statusFilter =
-        document.getElementById("statusFilter");
-
-
-    const categoryFilter =
-        document.getElementById("categoryFilter");
-
-
-    const noResults =
-        document.getElementById("noResults");
-
-
-    const search =
-        searchInput
-        ? searchInput.value.toLowerCase().trim()
-        : "";
-
-
-    const selectedStatus =
-        statusFilter
-        ? statusFilter.value.toLowerCase()
-        : "all";
-
-
-    const selectedCategory =
-        categoryFilter
-        ? categoryFilter.value.toLowerCase()
-        : "all";
-
-
-    const cards =
-        document.querySelectorAll(
-            ".complaint-card"
-        );
-
-
-    let visibleCount = 0;
-
-
-    cards.forEach(card => {
-
-        const text =
-            card.textContent.toLowerCase();
-
-
-        const status =
-            card.dataset.status || "";
-
-
-        const category =
-            (card.dataset.category || "")
-            .toLowerCase();
-
-
-        const matchesSearch =
-            text.includes(search);
-
-
-        const matchesStatus =
-            selectedStatus === "all" ||
-            status === selectedStatus;
-
-
-        const matchesCategory =
-            selectedCategory === "all" ||
-            category === selectedCategory;
-
-
-        if (
-            matchesSearch &&
-            matchesStatus &&
-            matchesCategory
-        ) {
-
-            card.style.display = "flex";
-
-            visibleCount++;
-
-        } else {
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-
-    if (noResults) {
-
-        noResults.style.display =
-            visibleCount === 0
-            ? "block"
-            : "none";
-
-    }
-}
-
-
-// =====================================================
-// CURRENT DATE
-// =====================================================
-
-function getCurrentDate() {
-
-    const now =
-        new Date();
-
-
-    return now.toLocaleDateString(
-        "en-US",
-        {
-            month: "short",
-            day: "numeric",
-            year: "numeric"
-        }
-    );
-}
-
-
-// =====================================================
-// SECURITY
-// =====================================================
-
-function escapeHTML(value) {
-
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
 }

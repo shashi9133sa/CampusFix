@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeProfileButton();
     initializeLogout();
 
+    loadLoggedInUser();
+
     loadDashboardData();
 
 });
@@ -145,6 +147,54 @@ function initializeLogout() {
    DASHBOARD DATA
 ========================= */
 
+function loadLoggedInUser() {
+    const savedUser = localStorage.getItem("campusFixUser");
+
+    if (!savedUser) {
+        window.location.href = "login.html";
+        return null;
+    }
+
+    try {
+        const user = JSON.parse(savedUser);
+
+        // Get dashboard elements
+        const profileName = document.querySelector(".profile-details strong");
+        const welcomeHeading = document.querySelector(".welcome-section h1");
+        const profileAvatar = document.querySelector(".profile-avatar");
+
+        // Display real user name
+        if (profileName) {
+            profileName.textContent = user.name || "Student";
+        }
+
+        if (welcomeHeading) {
+            welcomeHeading.textContent = `Good evening, ${user.name || "Student"} 👋`;
+        }
+
+        // Generate initials
+        if (profileAvatar) {
+            const name = user.name || "Student";
+
+            const initials = name
+                .split(" ")
+                .filter(word => word.length > 0)
+                .slice(0, 2)
+                .map(word => word.charAt(0).toUpperCase())
+                .join("");
+
+            profileAvatar.textContent = initials || "ST";
+        }
+
+        return user;
+
+    } catch (error) {
+        console.error("Invalid user data:", error);
+        localStorage.removeItem("campusFixUser");
+        window.location.href = "login.html";
+        return null;
+    }
+}
 async function loadDashboardData() {
 
     try {
@@ -185,25 +235,53 @@ async function loadDashboardData() {
 
 function updateStatistics(complaints) {
 
+    const savedUser =
+        localStorage.getItem("campusFixUser");
+
+    if (!savedUser) return;
+
+    let loggedInUser;
+
+    try {
+        loggedInUser =
+            JSON.parse(savedUser);
+    } catch (error) {
+        console.error("Invalid user data:", error);
+        return;
+    }
+
+    // Show statistics only for the logged-in student
+    const userComplaints =
+        complaints.filter(function (complaint) {
+
+            return Number(complaint.user_id) ===
+                Number(loggedInUser.id);
+
+        });
+
+
     const total =
-        complaints.length;
+        userComplaints.length;
+
 
     const pending =
-        complaints.filter(function (complaint) {
+        userComplaints.filter(function (complaint) {
 
             return complaint.status === "Pending";
 
         }).length;
 
+
     const progress =
-        complaints.filter(function (complaint) {
+        userComplaints.filter(function (complaint) {
 
             return complaint.status === "In Progress";
 
         }).length;
 
+
     const resolved =
-        complaints.filter(function (complaint) {
+        userComplaints.filter(function (complaint) {
 
             return complaint.status === "Resolved";
 
@@ -226,18 +304,21 @@ function updateStatistics(complaints) {
     }
 
 
-    /* Update impact number */
+    // Update impact number
 
     const impactNumber =
         document.querySelector(
             ".impact-number strong"
         );
 
+
     if (impactNumber) {
+
         animateNumber(
             impactNumber,
             resolved
         );
+
     }
 
 }

@@ -113,36 +113,61 @@ document.addEventListener("DOMContentLoaded", () => {
     function markAsRead(notification) {
 
         notification.classList.remove("unread");
-
+    
         notification.dataset.status = "read";
-
-
+    
+        const complaintId =
+            notification.dataset.complaintId;
+    
+        const savedUser =
+            localStorage.getItem("campusFixUser");
+    
+        if (savedUser && complaintId) {
+    
+            const user =
+                JSON.parse(savedUser);
+    
+            const readKey =
+                `campusFixReadNotifications_${user.id}`;
+    
+            let readNotifications =
+                JSON.parse(
+                    localStorage.getItem(readKey) || "[]"
+                );
+    
+            if (!readNotifications.includes(complaintId)) {
+    
+                readNotifications.push(complaintId);
+    
+                localStorage.setItem(
+                    readKey,
+                    JSON.stringify(readNotifications)
+                );
+            }
+        }
+    
+    
         const unreadDot =
             notification.querySelector(".unread-dot");
-
+    
         if (unreadDot) {
-
             unreadDot.remove();
-
         }
-
-
+    
+    
         const readButton =
             notification.querySelector(".read-button");
-
+    
         if (readButton) {
-
             readButton.remove();
-
         }
-
-
+    
+    
         updateCounts();
-
+    
         applyFilters();
-
+    
     }
-
 
     // ==========================================
     // SINGLE READ BUTTON
@@ -434,7 +459,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 
 async function loadBackendNotifications() {
+    const container =
+    document.getElementById("notificationsContainer");
 
+if (container) {
+    container.innerHTML = "";
+}
+  
     try {
 
         const response = await fetch(
@@ -447,16 +478,97 @@ async function loadBackendNotifications() {
 
         const complaints = await response.json();
 
-        console.log(
-            "Notifications loaded from backend:",
-            complaints
-        );
+console.log(
+    "All complaints loaded from backend:",
+    complaints
+);
 
-        complaints.forEach(complaint => {
 
-            createNotification(complaint);
+/* ==========================================
+   GET LOGGED-IN USER
+========================================== */
 
-        });
+const savedUser =
+    localStorage.getItem("campusFixUser");
+
+if (!savedUser) {
+
+    window.location.href =
+        "login.html";
+
+    return;
+
+}
+
+
+let loggedInUser;
+
+try {
+
+    loggedInUser =
+        JSON.parse(savedUser);
+
+} catch (error) {
+
+    console.error(
+        "Invalid logged-in user:",
+        error
+    );
+
+    localStorage.removeItem(
+        "campusFixUser"
+    );
+
+    window.location.href =
+        "login.html";
+
+    return;
+
+}
+
+
+/* ==========================================
+   ONLY THIS USER'S COMPLAINTS
+========================================== */
+
+const userComplaints =
+    complaints.filter(function (complaint) {
+
+        return Number(complaint.user_id) ===
+            Number(loggedInUser.id);
+
+    });
+
+
+console.log(
+    "Notifications for logged-in user:",
+    userComplaints
+);
+
+
+/* ==========================================
+   CLEAR OLD CONTENT
+========================================== */
+
+const container =
+    document.getElementById(
+        "notificationsContainer"
+    );
+
+if (container) {
+    container.innerHTML = "";
+}
+
+
+/* ==========================================
+   CREATE USER NOTIFICATIONS
+========================================== */
+
+userComplaints.forEach(function (complaint) {
+
+    createNotification(complaint);
+
+});
 
         setupReadButtons();
 
@@ -498,11 +610,41 @@ function createNotification(complaint) {
         document.createElement("article");
 
 
+        const savedUser =
+        localStorage.getItem("campusFixUser");
+    
+    let isRead = false;
+    
+    if (savedUser) {
+    
+        const user =
+            JSON.parse(savedUser);
+    
+        const readKey =
+            `campusFixReadNotifications_${user.id}`;
+    
+        const readNotifications =
+            JSON.parse(
+                localStorage.getItem(readKey) || "[]"
+            );
+    
+        isRead =
+            readNotifications.includes(
+                String(complaint.id)
+            );
+    }
+    
+    
     notification.className =
-        "notification-card unread";
-
+        isRead
+            ? "notification-card"
+            : "notification-card unread";
+    
     notification.dataset.status =
-        "unread";
+        isRead ? "read" : "unread";
+    
+    notification.dataset.complaintId =
+        String(complaint.id);
 
 
     // =========================
@@ -593,7 +735,7 @@ function createNotification(complaint) {
                     ${title}
                 </h3>
 
-                <span class="unread-dot"></span>
+                ${isRead ? "" : '<span class="unread-dot"></span>'}
 
             </div>
 
@@ -624,14 +766,14 @@ function createNotification(complaint) {
 
         <div class="notification-actions">
 
-            <button
-                class="read-button"
-                title="Mark as read"
-            >
-
-                <i class="fa-solid fa-check"></i>
-
-            </button>
+        ${isRead ? "" : `
+        <button
+            class="read-button"
+            title="Mark as read"
+        >
+            <i class="fa-solid fa-check"></i>
+        </button>
+        `}
 
 
             <button
