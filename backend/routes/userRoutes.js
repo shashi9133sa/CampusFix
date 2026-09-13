@@ -302,8 +302,16 @@ router.get("/:id", (req, res) => {
         req.params.id;
 
 
-    const sql = `
-        SELECT id, name, email, role, created_at
+        const sql = `
+        SELECT
+            id,
+            name,
+            student_id,
+            department,
+            year,
+            email,
+            role,
+            created_at
         FROM users
         WHERE id = ?
     `;
